@@ -7,7 +7,7 @@ A [Flyway] wrapper for .NET
 ## How to use
 First, download [Flyway commandline] tool
 
-#### Loading configurations
+#### Load configurations
 ```c#
 var config = new FlywayConfiguration("[flyway path]\conf\flyway.conf").Load();
 ```
