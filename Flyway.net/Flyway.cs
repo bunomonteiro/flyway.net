@@ -7,7 +7,7 @@ namespace Flyway.net
 {
     public class Flyway
     {
-        private string _flywayPath;
+        private readonly string _flywayPath;
 
         public Flyway(string flywayPath)
         {

@@ -53,19 +53,17 @@ namespace Flyway.net
         public FlywayErrorOverridesOption ErrorOverrides { get; private set; }
         public FlywayDryRunOutputOption DryRunOutput { get; private set; }
         public FlywayOracleSqlplusOption OracleSqlplus { get; private set; }
+        public FlywayEncodingOption Encoding { get; private set; }
         public FlywayLicenseKeyOption LicenseKey { get; private set; }
         #endregion
 
         private Action<string, string> Saver { get; set; }
         private Func<string, string[]> Loader { get; set; }
-        public FlywayConfiguration(string configurationFilePath) : this(configurationFilePath, File.WriteAllText, File.ReadAllLines) { }
-        public FlywayConfiguration(string configurationFilePath, Action<string, string> saver, Func<string, string[]> loader)
-        {
-            if(String.IsNullOrWhiteSpace(configurationFilePath))
-            {
-                throw new ArgumentNullException(nameof(configurationFilePath));
-            }
+        private bool IsInMemory { get; set; }
 
+        public FlywayConfiguration(string configurationFilePath = null) : this(File.WriteAllText, File.ReadAllLines, configurationFilePath) { }
+        public FlywayConfiguration(Action<string, string> saver, Func<string, string[]> loader, string configurationFilePath = null)
+        {
             if(saver is null)
             {
                 throw new ArgumentNullException(nameof(saver));
@@ -80,51 +78,55 @@ namespace Flyway.net
             this.Saver = saver;
             this.Loader = loader;
 
-            const string Prefix = "flyway.";
-            this.Url = new FlywayUrlOption(prefix: Prefix);
-            this.Driver = new FlywayDriverOption(prefix: Prefix);
-            this.User = new FlywayUserOption(prefix: Prefix);
-            this.Password = new FlywayPasswordOption(prefix: Prefix);
-            this.ConnectRetries = new FlywayConnectRetriesOption(prefix: Prefix);
-            this.InitSql = new FlywayInitSqlOption(prefix: Prefix);
-            this.Schemas = new FlywaySchemasOption(prefix: Prefix);
-            this.Table = new FlywayTableOption(prefix: Prefix);
-            this.Locations = new FlywayLocationsOption(prefix: Prefix);
-            this.Resolvers = new FlywayResolversOption(prefix: Prefix);
-            this.SkipDefaultResolvers = new FlywaySkipDefaultResolversOption(prefix: Prefix);
-            this.JarDirs = new FlywayJarDirsOption(prefix: Prefix);
-            this.SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption(prefix: Prefix);
-            this.UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption(prefix: Prefix);
-            this.RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption(prefix: Prefix);
-            this.SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption(prefix: Prefix);
-            this.SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption(prefix: Prefix);
-            this.Stream = new FlywayStreamOption(prefix: Prefix);
-            this.Batch = new FlywayBatchOption(prefix: Prefix);
-            this.PlaceholderReplacement = new FlywayPlaceholderReplacementOption(prefix: Prefix);
-            this.Placeholders = new FlywayPlaceholdersOption(prefix: Prefix);
-            this.PlaceholderPrefix = new FlywayPlaceholderPrefixOption(prefix: Prefix);
-            this.PlaceholderSuffix = new FlywayPlaceholderSuffixOption(prefix: Prefix);
-            this.Target = new FlywayTargetOption(prefix: Prefix);
-            this.ValidateOnMigrate = new FlywayValidateOnMigrateOption(prefix: Prefix);
-            this.CleanOnValidationError = new FlywayCleanOnValidationErrorOption(prefix: Prefix);
-            this.CleanDisabled = new FlywayCleanDisabledOption(prefix: Prefix);
-            this.BaselineVersion = new FlywayBaselineVersionOption(prefix: Prefix);
-            this.BaselineDescription = new FlywayBaselineDescriptionOption(prefix: Prefix);
-            this.BaselineOnMigrate = new FlywayBaselineOnMigrateOption(prefix: Prefix);
-            this.OutOfOrder = new FlywayOutOfOrderOption(prefix: Prefix);
-            this.Callbacks = new FlywayCallbacksOption(prefix: Prefix);
-            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption(prefix: Prefix);
-            this.IgnoreMissingMigrations = new FlywayIgnoreMissingMigrationsOption(prefix: Prefix);
-            this.IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption(prefix: Prefix);
-            this.IgnorePendingMigrations = new FlywayIgnorePendingMigrationsOption(prefix: Prefix);
-            this.IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption(prefix: Prefix);
-            this.Mixed = new FlywayMixedOption(prefix: Prefix);
-            this.Group = new FlywayGroupOption(prefix: Prefix);
-            this.InstalledBy = new FlywayInstalledByOption(prefix: Prefix);
-            this.ErrorOverrides = new FlywayErrorOverridesOption(prefix: Prefix);
-            this.DryRunOutput = new FlywayDryRunOutputOption(prefix: Prefix);
-            this.OracleSqlplus = new FlywayOracleSqlplusOption(prefix: Prefix);
-            this.LicenseKey = new FlywayLicenseKeyOption(prefix: Prefix);
+            this.IsInMemory = String.IsNullOrWhiteSpace(ConfigurationFilePath);
+
+            Prefix prefix = IsInMemory ? Prefix.Cli : Prefix.File;
+
+            this.Url = new FlywayUrlOption(prefix: prefix);
+            this.Driver = new FlywayDriverOption(prefix: prefix);
+            this.User = new FlywayUserOption(prefix: prefix);
+            this.Password = new FlywayPasswordOption(prefix: prefix);
+            this.ConnectRetries = new FlywayConnectRetriesOption(prefix: prefix);
+            this.InitSql = new FlywayInitSqlOption(prefix: prefix);
+            this.Schemas = new FlywaySchemasOption(prefix: prefix);
+            this.Table = new FlywayTableOption(prefix: prefix);
+            this.Locations = new FlywayLocationsOption(prefix: prefix);
+            this.Resolvers = new FlywayResolversOption(prefix: prefix);
+            this.SkipDefaultResolvers = new FlywaySkipDefaultResolversOption(prefix: prefix);
+            this.JarDirs = new FlywayJarDirsOption(prefix: prefix);
+            this.SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption(prefix: prefix);
+            this.UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption(prefix: prefix);
+            this.RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption(prefix: prefix);
+            this.SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption(prefix: prefix);
+            this.SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption(prefix: prefix);
+            this.Stream = new FlywayStreamOption(prefix: prefix);
+            this.Batch = new FlywayBatchOption(prefix: prefix);
+            this.PlaceholderReplacement = new FlywayPlaceholderReplacementOption(prefix: prefix);
+            this.Placeholders = new FlywayPlaceholdersOption(prefix: prefix);
+            this.PlaceholderPrefix = new FlywayPlaceholderPrefixOption(prefix: prefix);
+            this.PlaceholderSuffix = new FlywayPlaceholderSuffixOption(prefix: prefix);
+            this.Target = new FlywayTargetOption(prefix: prefix);
+            this.ValidateOnMigrate = new FlywayValidateOnMigrateOption(prefix: prefix);
+            this.CleanOnValidationError = new FlywayCleanOnValidationErrorOption(prefix: prefix);
+            this.CleanDisabled = new FlywayCleanDisabledOption(prefix: prefix);
+            this.BaselineVersion = new FlywayBaselineVersionOption(prefix: prefix);
+            this.BaselineDescription = new FlywayBaselineDescriptionOption(prefix: prefix);
+            this.BaselineOnMigrate = new FlywayBaselineOnMigrateOption(prefix: prefix);
+            this.OutOfOrder = new FlywayOutOfOrderOption(prefix: prefix);
+            this.Callbacks = new FlywayCallbacksOption(prefix: prefix);
+            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption(prefix: prefix);
+            this.IgnoreMissingMigrations = new FlywayIgnoreMissingMigrationsOption(prefix: prefix);
+            this.IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption(prefix: prefix);
+            this.IgnorePendingMigrations = new FlywayIgnorePendingMigrationsOption(prefix: prefix);
+            this.IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption(prefix: prefix);
+            this.Mixed = new FlywayMixedOption(prefix: prefix);
+            this.Group = new FlywayGroupOption(prefix: prefix);
+            this.InstalledBy = new FlywayInstalledByOption(prefix: prefix);
+            this.ErrorOverrides = new FlywayErrorOverridesOption(prefix: prefix);
+            this.DryRunOutput = new FlywayDryRunOutputOption(prefix: prefix);
+            this.OracleSqlplus = new FlywayOracleSqlplusOption(prefix: prefix);
+            this.Encoding = new FlywayEncodingOption(prefix: prefix);
+            this.LicenseKey = new FlywayLicenseKeyOption(prefix: prefix);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
@@ -153,7 +155,6 @@ namespace Flyway.net
                 return default;
             }
         }
-
         public FlywayConfiguration Load()
         {
             var configLines = this.Loader(this.ConfigurationFilePath);
@@ -207,6 +208,7 @@ namespace Flyway.net
                 else if(line.StartsWith(this.ErrorOverrides.FullName)) this.ErrorOverrides.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.DryRunOutput.FullName)) this.DryRunOutput.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.OracleSqlplus.FullName)) this.OracleSqlplus.Value = ReadValue<string>(line);
+                else if(line.StartsWith(this.Encoding.FullName)) this.Encoding.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.LicenseKey.FullName)) this.LicenseKey.Value = ReadValue<string>(line);
             }
 
@@ -264,6 +266,7 @@ namespace Flyway.net
             config.AppendLine(this.ErrorOverrides.Formatted());
             config.AppendLine(this.DryRunOutput.Formatted());
             config.AppendLine(this.OracleSqlplus.Formatted());
+            config.AppendLine(this.Encoding.Formatted());
             config.AppendLine(this.LicenseKey.Formatted());
 
             return config.ToString().Trim();

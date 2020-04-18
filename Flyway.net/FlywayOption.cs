@@ -8,30 +8,37 @@ namespace Flyway.net
     public abstract class FlywayOption<T>
     {
         public virtual T Value { get; set; }
-        public string Prefix { get; private set; }
+        public Prefix Prefix { get; private set; }
         public string Name { get; private set; }
         public string FullName { get { return $"{this.Prefix}{this.Name}"; } }
         public bool Required { get; private set; }
         public bool IsProFeature { get; private set; }
 
-        public FlywayOption(string name, bool required = false, string prefix = "-", bool isProFeature = false)
+        public FlywayOption(string name, bool required = false, Prefix prefix = new Prefix(), bool isProFeature = false)
         {
+            if(String.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             this.Name = name;
             this.Required = required;
             this.Prefix = prefix;
             this.IsProFeature = isProFeature;
         }
-        public virtual string Formatted()
+        public virtual string Formatted() => String.IsNullOrWhiteSpace(this.ToString()) ? String.Empty : $"{this.FullName}={this}";
+
+        public override string ToString()
         {
             if(!object.Equals(default(T), Value))
             {
                 if(typeof(T) == typeof(bool?))
                 {
-                    return $" {this.Prefix}{this.Name}={this.Value.ToString().ToLower()} ";
+                    return Convert.ToString(this.Value).ToLower();
                 }
                 else
                 {
-                    return $" {this.Prefix}{this.Name}={this.Value} ";
+                    return Convert.ToString(this.Value);
                 }
             }
             else
@@ -39,8 +46,6 @@ namespace Flyway.net
                 return string.Empty;
             }
         }
-
-        public override string ToString() => this.Formatted();
     }
 
     public class FlywayUrlOption : FlywayOption<string>
