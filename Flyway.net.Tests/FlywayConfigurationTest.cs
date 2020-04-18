@@ -13,7 +13,7 @@ namespace Flyway.net.Tests
 
         public FlywayConfigurationTest()
         {
-            this._configuration = new FlywayConfiguration("pseudo/path/", this.Saver, this.Loader);
+            this._configuration = new FlywayConfiguration(this.Saver, this.Loader);
         }
 
         [Fact]
