@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Flyway.net
 {
@@ -41,38 +43,24 @@ namespace Flyway.net
 
         public override string ToArgs()
         {
-            var options = new StringBuilder();
+            var options = new List<string>();
 
-            if(Url != null)
-                options.Append($" {Url.Formatted()}");
-            if(Driver != null)
-                options.Append($" {Driver.Formatted()}");
-            if(User != null)
-                options.Append($" {User.Formatted()}");
-            if(Password != null)
-                options.Append($" {Password.Formatted()}");
-            if(ConnectRetries != null)
-                options.Append($" {ConnectRetries.Formatted()}");
-            if(InitSql != null)
-                options.Append($" {InitSql.Formatted()}");
-            if(Schemas != null)
-                options.Append($" {Schemas.Formatted()}");
-            if(Table != null)
-                options.Append($" {Table.Formatted()}");
-            if(JarDirs != null)
-                options.Append($" {JarDirs.Formatted()}");
-            if(Callbacks != null)
-                options.Append($" {Callbacks.Formatted()}");
-            if(SkipDefaultCallbacks != null)
-                options.Append($" {SkipDefaultCallbacks.Formatted()}");
-            if(BaselineVersion != null)
-                options.Append($" {BaselineVersion.Formatted()}");
-            if(BaselineDescription != null)
-                options.Append($" {BaselineDescription.Formatted()}");
-            if(LicenseKey != null)
-                options.Append($" {LicenseKey.Formatted()}");
+            options.Add(Url.Formatted());
+            options.Add(Driver.Formatted());
+            options.Add(User.Formatted());
+            options.Add(Password.Formatted());
+            options.Add(ConnectRetries.Formatted());
+            options.Add(InitSql.Formatted());
+            options.Add(Schemas.Formatted());
+            options.Add(Table.Formatted());
+            options.Add(JarDirs.Formatted());
+            options.Add(Callbacks.Formatted());
+            options.Add(SkipDefaultCallbacks.Formatted());
+            options.Add(BaselineVersion.Formatted());
+            options.Add(BaselineDescription.Formatted());
+            options.Add(LicenseKey.Formatted());
 
-            return options.ToString().Trim();
+            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Trim()));
         }
 
         public static implicit operator FlywayBaselineOptionGroup(FlywayConfiguration configuration)

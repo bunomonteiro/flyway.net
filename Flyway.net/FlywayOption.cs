@@ -38,7 +38,7 @@ namespace Flyway.net
                 }
                 else
                 {
-                    return Convert.ToString(this.Value);
+                    return Convert.ToString(this.Value).Trim();
                 }
             }
             else
@@ -188,11 +188,18 @@ namespace Flyway.net
         public FlywayPlaceholdersOption(string name = "placeholders", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { this.Value = new Dictionary<string, string>(); }
 
-        public override string Formatted()
+        public override string Formatted() => String.Join(" ", this.Values(true)).Trim();
+        public override string ToString() => String.Join(" ", this.Values()).Trim();
+
+        private string[] Values(bool fullname = false)
         {
-            return (this.Value.Keys.Count > 0)
-                ? $" {String.Join(" ", this.Value.Select(vp => $"{Prefix}{this.Name}.{vp.Key}={vp.Value}").ToArray())} "
-                : String.Empty;
+            if(!object.Equals(default(Dictionary<string, string>), Value))
+            {
+                return this.Value.Select(item => $"{(fullname ? this.FullName : this.Name)}.{item.Key}={item.Value}").ToArray();
+            } else
+            {
+                return Array.Empty<string>();
+            }
         }
     }
     public class FlywayPlaceholderPrefixOption : FlywayOption<string>
@@ -235,8 +242,15 @@ namespace Flyway.net
 
         public override string Formatted()
         {
-            return (this.Value.Count > 0)
-                ? $" {this.Prefix}{this.Name}={String.Join(",", this.Value)} "
+            return !object.Equals(default(List<string>), Value) && Value.Any()
+                ? $"{this.FullName}={String.Join(",", this.Value)}"
+                : String.Empty;
+        }
+
+        public override string ToString()
+        {
+            return !object.Equals(default(List<string>), Value) && Value.Any()
+                ? $"{this.Name}={String.Join(",", this.Value)}"
                 : String.Empty;
         }
     }

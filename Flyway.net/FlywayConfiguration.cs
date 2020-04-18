@@ -157,6 +157,8 @@ namespace Flyway.net
         }
         public FlywayConfiguration Load()
         {
+            if(this.IsInMemory) return this;
+
             var configLines = this.Loader(this.ConfigurationFilePath);
 
             string line;
@@ -217,7 +219,10 @@ namespace Flyway.net
 
         public void Save()
         {
-            this.Saver(this.ConfigurationFilePath, Regex.Replace(this.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline));
+            if(!this.IsInMemory)
+            {
+                this.Saver(this.ConfigurationFilePath, Regex.Replace(this.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline));
+            }
         }
 
         public override string ToString()

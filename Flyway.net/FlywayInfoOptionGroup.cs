@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Flyway.net
 {
@@ -67,64 +69,37 @@ namespace Flyway.net
 
         public override string ToArgs()
         {
-            var options = new StringBuilder();
+            var options = new List<string>();
 
-            if(Url != null)
-                options.Append($" {Url.Formatted()}");
-            if(Driver != null)
-                options.Append($" {Driver.Formatted()}");
-            if(User != null)
-                options.Append($" {User.Formatted()}");
-            if(Password != null)
-                options.Append($" {Password.Formatted()}");
-            if(ConnectRetries != null)
-                options.Append($" {ConnectRetries.Formatted()}");
-            if(InitSql != null)
-                options.Append($" {InitSql.Formatted()}");
-            if(Schemas != null)
-                options.Append($" {Schemas.Formatted()}");
-            if(Table != null)
-                options.Append($" {Table.Formatted()}");
-            if(Locations != null)
-                options.Append($" {Locations.Formatted()}");
-            if(JarDirs != null)
-                options.Append($" {JarDirs.Formatted()}");
-            if(SqlMigrationPrefix != null)
-                options.Append($" {SqlMigrationPrefix.Formatted()}");
-            if(UndoSqlMigrationPrefix != null)
-                options.Append($" {UndoSqlMigrationPrefix.Formatted()}");
-            if(RepeatableSqlMigrationPrefix != null)
-                options.Append($" {RepeatableSqlMigrationPrefix.Formatted()}");
-            if(SqlMigrationSeparator != null)
-                options.Append($" {SqlMigrationSeparator.Formatted()}");
-            if(SqlMigrationSuffixes != null)
-                options.Append($" {SqlMigrationSuffixes.Formatted()}");
-            if(Encoding != null)
-                options.Append($" {Encoding.Formatted()}");
-            if(PlaceholderReplacement != null)
-                options.Append($" {PlaceholderReplacement.Formatted()}");
-            if(Placeholders != null)
-                options.Append($" {Placeholders.Formatted()}");
-            if(PlaceholderPrefix != null)
-                options.Append($" {PlaceholderPrefix.Formatted()}");
-            if(PlaceholderSuffix != null)
-                options.Append($" {PlaceholderSuffix.Formatted()}");
-            if(Resolvers != null)
-                options.Append($" {Resolvers.Formatted()}");
-            if(SkipDefaultResolvers != null)
-                options.Append($" {SkipDefaultResolvers.Formatted()}");
-            if(Callbacks != null)
-                options.Append($" {Callbacks.Formatted()}");
-            if(SkipDefaultCallbacks != null)
-                options.Append($" {SkipDefaultCallbacks.Formatted()}");
-            if(Target != null)
-                options.Append($" {Target.Formatted()}");
-            if(OutOfOrder != null)
-                options.Append($" {OutOfOrder.Formatted()}");
-            if(LicenseKey != null)
-                options.Append($" {LicenseKey.Formatted()}");
+            options.Add(Url.Formatted());
+            options.Add(Driver.Formatted());
+            options.Add(User.Formatted());
+            options.Add(Password.Formatted());
+            options.Add(ConnectRetries.Formatted());
+            options.Add(InitSql.Formatted());
+            options.Add(Schemas.Formatted());
+            options.Add(Table.Formatted());
+            options.Add(Locations.Formatted());
+            options.Add(JarDirs.Formatted());
+            options.Add(SqlMigrationPrefix.Formatted());
+            options.Add(UndoSqlMigrationPrefix.Formatted());
+            options.Add(RepeatableSqlMigrationPrefix.Formatted());
+            options.Add(SqlMigrationSeparator.Formatted());
+            options.Add(SqlMigrationSuffixes.Formatted());
+            options.Add(Encoding.Formatted());
+            options.Add(PlaceholderReplacement.Formatted());
+            options.Add(Placeholders.Formatted());
+            options.Add(PlaceholderPrefix.Formatted());
+            options.Add(PlaceholderSuffix.Formatted());
+            options.Add(Resolvers.Formatted());
+            options.Add(SkipDefaultResolvers.Formatted());
+            options.Add(Callbacks.Formatted());
+            options.Add(SkipDefaultCallbacks.Formatted());
+            options.Add(Target.Formatted());
+            options.Add(OutOfOrder.Formatted());
+            options.Add(LicenseKey.Formatted());
 
-            return options.ToString();
+            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Trim()));
         }
 
         public static implicit operator FlywayInfoOptionGroup(FlywayConfiguration configuration)
