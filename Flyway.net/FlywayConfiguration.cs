@@ -162,8 +162,9 @@ namespace Flyway.net
             for(int i = 0; i < configLines.Length; i++)
             {
                 line = configLines[i].Trim();
-                
-                if(line.StartsWith(this.Url.FullName)) this.Url.Value = ReadValue<string>(line);
+
+                if(String.IsNullOrWhiteSpace(line)) continue;
+                else if(line.StartsWith(this.Url.FullName)) this.Url.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.Driver.FullName)) this.Driver.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.User.FullName)) this.User.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.Password.FullName)) this.Password.Value = ReadValue<string>(line);
@@ -265,7 +266,7 @@ namespace Flyway.net
             config.AppendLine(this.OracleSqlplus.Formatted());
             config.AppendLine(this.LicenseKey.Formatted());
 
-            return config.ToString();
+            return config.ToString().Trim();
         }
     }
 }

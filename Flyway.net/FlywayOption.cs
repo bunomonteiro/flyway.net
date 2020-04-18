@@ -39,6 +39,8 @@ namespace Flyway.net
                 return string.Empty;
             }
         }
+
+        public override string ToString() => this.Formatted();
     }
 
     public class FlywayUrlOption : FlywayOption<string>
