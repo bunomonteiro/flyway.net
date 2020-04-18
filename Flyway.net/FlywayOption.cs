@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Flyway.net
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1012:Abstract types should not have constructors", Justification = "<Pending>")]
     public abstract class FlywayOption<T>
     {
         public virtual T Value { get; set; }
@@ -171,13 +172,11 @@ namespace Flyway.net
         public override Dictionary<string, string> Value
         {
             get => base.Value;
-            set => base.Value = (value == null) ? new Dictionary<string, string>() : value;
+            set => base.Value = value ?? new Dictionary<string, string>();
         }
         public FlywayPlaceholdersOption(Dictionary<string, string> @value) : base("placeholders")
         {
-            this.Value = (@value != null)
-                ? @value
-                : new Dictionary<string, string>();
+            this.Value = @value ?? new Dictionary<string, string>();
         }
         public FlywayPlaceholdersOption(string name = "placeholders", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { this.Value = new Dictionary<string, string>(); }
@@ -218,13 +217,11 @@ namespace Flyway.net
         public override List<string> Value
         {
             get => base.Value;
-            set => base.Value = (value == null) ? new List<string>() : value;
+            set => base.Value = value ?? new List<string>();
         }
         public FlywayCallbacksOption(List<string> @value) : base("callbacks")
         {
-            this.Value = (@value != null)
-                ? @value
-                : new List<string>();
+            this.Value = @value ?? new List<string>();
         }
         public FlywayCallbacksOption(string name = "callbacks", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { this.Value = new List<string>(); }

@@ -56,16 +56,31 @@ namespace Flyway.net
         public FlywayLicenseKeyOption LicenseKey { get; private set; }
         #endregion
 
-        public FlywayConfiguration(string configurationFilePath)
+        private Action<string, string> Saver { get; set; }
+        private Func<string, string[]> Loader { get; set; }
+        public FlywayConfiguration(string configurationFilePath) : this(configurationFilePath, File.WriteAllText, File.ReadAllLines) { }
+        public FlywayConfiguration(string configurationFilePath, Action<string, string> saver, Func<string, string[]> loader)
         {
             if(String.IsNullOrWhiteSpace(configurationFilePath))
             {
-                throw new ArgumentNullException("configurationPath");
+                throw new ArgumentNullException(nameof(configurationFilePath));
             }
 
-            const string Prefix = "flyway.";
+            if(saver is null)
+            {
+                throw new ArgumentNullException(nameof(saver));
+            }
+
+            if(loader is null)
+            {
+                throw new ArgumentNullException(nameof(loader));
+            }
 
             this.ConfigurationFilePath = configurationFilePath;
+            this.Saver = saver;
+            this.Loader = loader;
+
+            const string Prefix = "flyway.";
             this.Url = new FlywayUrlOption(prefix: Prefix);
             this.Driver = new FlywayDriverOption(prefix: Prefix);
             this.User = new FlywayUserOption(prefix: Prefix);
@@ -112,6 +127,7 @@ namespace Flyway.net
             this.LicenseKey = new FlywayLicenseKeyOption(prefix: Prefix);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         private T ReadValue<T>(string line)
         {
             try
@@ -123,7 +139,7 @@ namespace Flyway.net
 
                 if(String.IsNullOrWhiteSpace(config))
                 {
-                    return default(T);
+                    return default;
                 }
 
                 if(type == typeof(bool?) || type == typeof(bool))
@@ -132,18 +148,17 @@ namespace Flyway.net
                 }
 
                 return (T)Convert.ChangeType(config, type);
-            }
-            catch(Exception)
+            } catch(Exception)
             {
-                return default(T);
+                return default;
             }
         }
 
         public FlywayConfiguration Load()
         {
-            var configLines = File.ReadAllLines(this.ConfigurationFilePath);
+            var configLines = this.Loader(this.ConfigurationFilePath);
 
-            string line = String.Empty;
+            string line;
             for(int i = 0; i < configLines.Length; i++)
             {
                 line = configLines[i].Trim();
@@ -199,6 +214,11 @@ namespace Flyway.net
 
         public void Save()
         {
+            this.Saver(this.ConfigurationFilePath, Regex.Replace(this.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline));
+        }
+
+        public override string ToString()
+        {
             var config = new StringBuilder();
             config.AppendLine(this.Url.Formatted());
             config.AppendLine(this.Driver.Formatted());
@@ -245,7 +265,7 @@ namespace Flyway.net
             config.AppendLine(this.OracleSqlplus.Formatted());
             config.AppendLine(this.LicenseKey.Formatted());
 
-            File.WriteAllText(this.ConfigurationFilePath, Regex.Replace(config.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline));
+            return config.ToString();
         }
     }
 }
