@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Flyway.net.OptionGroups;
 
 namespace Flyway.net
 {
@@ -11,12 +12,12 @@ namespace Flyway.net
 
         public Flyway(string flywayPath)
         {
-            if(String.IsNullOrWhiteSpace(flywayPath) || !System.IO.Directory.Exists(flywayPath))
+            if(string.IsNullOrWhiteSpace(flywayPath) || !System.IO.Directory.Exists(flywayPath))
             {
                 throw new Exception("Invalid Path");
             }
 
-            this._flywayPath = flywayPath;
+            _flywayPath = flywayPath;
         }
 
         /// <summary>
@@ -99,24 +100,24 @@ namespace Flyway.net
 
         private string Exec(string command, FlywayOptionGroup options)
         {
-            if(String.IsNullOrWhiteSpace(command))
+            if(string.IsNullOrWhiteSpace(command))
             {
                 throw new Exception("Command is invalid!");
             }
 
             if(options != null && !options.Validate())
             {
-                throw new Exception("Command options are invalid!");    
+                throw new Exception("Command options are invalid!");
             }
 
-            var output = new StringBuilder();
-            var process = new Process();
+            StringBuilder output = new StringBuilder();
+            Process process = new Process();
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.RedirectStandardInput = false;
-            process.StartInfo.WorkingDirectory = this._flywayPath;
+            process.StartInfo.WorkingDirectory = _flywayPath;
             process.StartInfo.FileName = "cmd.exe";
             process.StartInfo.Arguments = $"/c flyway {(options != null ? options.ToArgs() : "")} {command} ";
 

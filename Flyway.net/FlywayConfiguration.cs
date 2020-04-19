@@ -75,59 +75,59 @@ namespace Flyway.net
                 throw new ArgumentNullException(nameof(loader));
             }
 
-            this.ConfigurationFilePath = configurationFilePath;
-            this.Saver = saver;
-            this.Loader = loader;
+            ConfigurationFilePath = configurationFilePath;
+            Saver = saver;
+            Loader = loader;
 
-            this.IsInMemory = String.IsNullOrWhiteSpace(ConfigurationFilePath);
+            IsInMemory = string.IsNullOrWhiteSpace(ConfigurationFilePath);
 
             Prefix prefix = IsInMemory ? Prefix.Cli : Prefix.File;
 
-            this.Url = new FlywayUrlOption(prefix: prefix);
-            this.Driver = new FlywayDriverOption(prefix: prefix);
-            this.User = new FlywayUserOption(prefix: prefix);
-            this.Password = new FlywayPasswordOption(prefix: prefix);
-            this.ConnectRetries = new FlywayConnectRetriesOption(prefix: prefix);
-            this.InitSql = new FlywayInitSqlOption(prefix: prefix);
-            this.Schemas = new FlywaySchemasOption(prefix: prefix);
-            this.Table = new FlywayTableOption(prefix: prefix);
-            this.Locations = new FlywayLocationsOption(prefix: prefix);
-            this.Resolvers = new FlywayResolversOption(prefix: prefix);
-            this.SkipDefaultResolvers = new FlywaySkipDefaultResolversOption(prefix: prefix);
-            this.JarDirs = new FlywayJarDirsOption(prefix: prefix);
-            this.SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption(prefix: prefix);
-            this.UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption(prefix: prefix);
-            this.RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption(prefix: prefix);
-            this.SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption(prefix: prefix);
-            this.SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption(prefix: prefix);
-            this.Stream = new FlywayStreamOption(prefix: prefix);
-            this.Batch = new FlywayBatchOption(prefix: prefix);
-            this.PlaceholderReplacement = new FlywayPlaceholderReplacementOption(prefix: prefix);
-            this.Placeholders = new FlywayPlaceholdersOption(prefix: prefix);
-            this.PlaceholderPrefix = new FlywayPlaceholderPrefixOption(prefix: prefix);
-            this.PlaceholderSuffix = new FlywayPlaceholderSuffixOption(prefix: prefix);
-            this.Target = new FlywayTargetOption(prefix: prefix);
-            this.ValidateOnMigrate = new FlywayValidateOnMigrateOption(prefix: prefix);
-            this.CleanOnValidationError = new FlywayCleanOnValidationErrorOption(prefix: prefix);
-            this.CleanDisabled = new FlywayCleanDisabledOption(prefix: prefix);
-            this.BaselineVersion = new FlywayBaselineVersionOption(prefix: prefix);
-            this.BaselineDescription = new FlywayBaselineDescriptionOption(prefix: prefix);
-            this.BaselineOnMigrate = new FlywayBaselineOnMigrateOption(prefix: prefix);
-            this.OutOfOrder = new FlywayOutOfOrderOption(prefix: prefix);
-            this.Callbacks = new FlywayCallbacksOption(prefix: prefix);
-            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption(prefix: prefix);
-            this.IgnoreMissingMigrations = new FlywayIgnoreMissingMigrationsOption(prefix: prefix);
-            this.IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption(prefix: prefix);
-            this.IgnorePendingMigrations = new FlywayIgnorePendingMigrationsOption(prefix: prefix);
-            this.IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption(prefix: prefix);
-            this.Mixed = new FlywayMixedOption(prefix: prefix);
-            this.Group = new FlywayGroupOption(prefix: prefix);
-            this.InstalledBy = new FlywayInstalledByOption(prefix: prefix);
-            this.ErrorOverrides = new FlywayErrorOverridesOption(prefix: prefix);
-            this.DryRunOutput = new FlywayDryRunOutputOption(prefix: prefix);
-            this.OracleSqlplus = new FlywayOracleSqlplusOption(prefix: prefix);
-            this.Encoding = new FlywayEncodingOption(prefix: prefix);
-            this.LicenseKey = new FlywayLicenseKeyOption(prefix: prefix);
+            Url = new FlywayUrlOption(prefix: prefix);
+            Driver = new FlywayDriverOption(prefix: prefix);
+            User = new FlywayUserOption(prefix: prefix);
+            Password = new FlywayPasswordOption(prefix: prefix);
+            ConnectRetries = new FlywayConnectRetriesOption(prefix: prefix);
+            InitSql = new FlywayInitSqlOption(prefix: prefix);
+            Schemas = new FlywaySchemasOption(prefix: prefix);
+            Table = new FlywayTableOption(prefix: prefix);
+            Locations = new FlywayLocationsOption(prefix: prefix);
+            Resolvers = new FlywayResolversOption(prefix: prefix);
+            SkipDefaultResolvers = new FlywaySkipDefaultResolversOption(prefix: prefix);
+            JarDirs = new FlywayJarDirsOption(prefix: prefix);
+            SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption(prefix: prefix);
+            UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption(prefix: prefix);
+            RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption(prefix: prefix);
+            SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption(prefix: prefix);
+            SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption(prefix: prefix);
+            Stream = new FlywayStreamOption(prefix: prefix);
+            Batch = new FlywayBatchOption(prefix: prefix);
+            PlaceholderReplacement = new FlywayPlaceholderReplacementOption(prefix: prefix);
+            Placeholders = new FlywayPlaceholdersOption(prefix: prefix);
+            PlaceholderPrefix = new FlywayPlaceholderPrefixOption(prefix: prefix);
+            PlaceholderSuffix = new FlywayPlaceholderSuffixOption(prefix: prefix);
+            Target = new FlywayTargetOption(prefix: prefix);
+            ValidateOnMigrate = new FlywayValidateOnMigrateOption(prefix: prefix);
+            CleanOnValidationError = new FlywayCleanOnValidationErrorOption(prefix: prefix);
+            CleanDisabled = new FlywayCleanDisabledOption(prefix: prefix);
+            BaselineVersion = new FlywayBaselineVersionOption(prefix: prefix);
+            BaselineDescription = new FlywayBaselineDescriptionOption(prefix: prefix);
+            BaselineOnMigrate = new FlywayBaselineOnMigrateOption(prefix: prefix);
+            OutOfOrder = new FlywayOutOfOrderOption(prefix: prefix);
+            Callbacks = new FlywayCallbacksOption(prefix: prefix);
+            SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption(prefix: prefix);
+            IgnoreMissingMigrations = new FlywayIgnoreMissingMigrationsOption(prefix: prefix);
+            IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption(prefix: prefix);
+            IgnorePendingMigrations = new FlywayIgnorePendingMigrationsOption(prefix: prefix);
+            IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption(prefix: prefix);
+            Mixed = new FlywayMixedOption(prefix: prefix);
+            Group = new FlywayGroupOption(prefix: prefix);
+            InstalledBy = new FlywayInstalledByOption(prefix: prefix);
+            ErrorOverrides = new FlywayErrorOverridesOption(prefix: prefix);
+            DryRunOutput = new FlywayDryRunOutputOption(prefix: prefix);
+            OracleSqlplus = new FlywayOracleSqlplusOption(prefix: prefix);
+            Encoding = new FlywayEncodingOption(prefix: prefix);
+            LicenseKey = new FlywayLicenseKeyOption(prefix: prefix);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
@@ -138,9 +138,9 @@ namespace Flyway.net
                 Type type = typeof(T);
                 type = Nullable.GetUnderlyingType(type) ?? type;
 
-                var config = line.Substring(line.IndexOf("=") + 1).Trim();
+                string config = line.Substring(line.IndexOf("=") + 1).Trim();
 
-                if(String.IsNullOrWhiteSpace(config))
+                if(string.IsNullOrWhiteSpace(config))
                 {
                     return default;
                 }
@@ -164,10 +164,10 @@ namespace Flyway.net
             {
                 Type keyType = typeof(TKey);
                 keyType = Nullable.GetUnderlyingType(keyType) ?? keyType;
-                var keyLine = line.Substring(option.FullName.Length + 1);
-                var key = keyLine.Substring(0, keyLine.IndexOf("=")).Trim();
+                string keyLine = line.Substring(option.FullName.Length + 1);
+                string key = keyLine.Substring(0, keyLine.IndexOf("=")).Trim();
 
-                if(String.IsNullOrWhiteSpace(key))
+                if(string.IsNullOrWhiteSpace(key))
                 {
                     return;
                 }
@@ -183,6 +183,8 @@ namespace Flyway.net
                 return;
             }
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
         private List<T> ReadListValue<T>(string line)
         {
             try
@@ -190,9 +192,9 @@ namespace Flyway.net
                 Type type = typeof(T);
                 type = Nullable.GetUnderlyingType(type) ?? type;
 
-                var config = line.Substring(line.IndexOf("=") + 1).Trim();
+                string config = line.Substring(line.IndexOf("=") + 1).Trim();
 
-                if(String.IsNullOrWhiteSpace(config))
+                if(string.IsNullOrWhiteSpace(config))
                 {
                     return default;
                 }
@@ -203,7 +205,7 @@ namespace Flyway.net
                 }
 
                 return (List<T>)Convert.ChangeType(config.Split(',').ToList().OfType<T>().ToList(), typeof(List<T>));
-                       
+
             } catch(Exception)
             {
                 return default;
@@ -212,61 +214,157 @@ namespace Flyway.net
 
         public FlywayConfiguration Load()
         {
-            if(this.IsInMemory) return this;
+            if(IsInMemory)
+            {
+                return this;
+            }
 
-            var configLines = this.Loader(this.ConfigurationFilePath);
+            string[] configLines = Loader(ConfigurationFilePath);
 
             string line;
             for(int i = 0; i < configLines.Length; i++)
             {
                 line = configLines[i].Trim();
 
-                if(String.IsNullOrWhiteSpace(line)) continue;
-                else if(line.StartsWith(this.Url.FullName)) this.Url.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Driver.FullName)) this.Driver.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.User.FullName)) this.User.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Password.FullName)) this.Password.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.ConnectRetries.FullName)) this.ConnectRetries.Value = ReadValue<ushort?>(line);
-                else if(line.StartsWith(this.InitSql.FullName)) this.InitSql.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Schemas.FullName)) this.Schemas.Value = ReadListValue<string>(line);
-                else if(line.StartsWith(this.Table.FullName)) this.Table.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Locations.FullName)) this.Locations.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Resolvers.FullName)) this.Resolvers.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.SkipDefaultResolvers.FullName)) this.SkipDefaultResolvers.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.JarDirs.FullName)) this.JarDirs.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.SqlMigrationPrefix.FullName)) this.SqlMigrationPrefix.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.UndoSqlMigrationPrefix.FullName)) this.UndoSqlMigrationPrefix.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.RepeatableSqlMigrationPrefix.FullName)) this.RepeatableSqlMigrationPrefix.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.SqlMigrationSeparator.FullName)) this.SqlMigrationSeparator.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.SqlMigrationSuffixes.FullName)) this.SqlMigrationSuffixes.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Stream.FullName)) this.Stream.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Batch.FullName)) this.Batch.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.PlaceholderReplacement.FullName)) this.PlaceholderReplacement.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Placeholders.FullName)) ReadKeyValuePairValue(this.Placeholders, line);
-                else if(line.StartsWith(this.PlaceholderPrefix.FullName)) this.PlaceholderPrefix.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.PlaceholderSuffix.FullName)) this.PlaceholderSuffix.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Target.FullName)) this.Target.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.ValidateOnMigrate.FullName)) this.ValidateOnMigrate.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.CleanOnValidationError.FullName)) this.CleanOnValidationError.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.CleanDisabled.FullName)) this.CleanDisabled.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.BaselineVersion.FullName)) this.BaselineVersion.Value = ReadValue<uint?>(line);
-                else if(line.StartsWith(this.BaselineDescription.FullName)) this.BaselineDescription.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.BaselineOnMigrate.FullName)) this.BaselineOnMigrate.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.OutOfOrder.FullName)) this.OutOfOrder.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Callbacks.FullName)) this.Callbacks.Value = ReadListValue<string>(line);
-                else if(line.StartsWith(this.SkipDefaultCallbacks.FullName)) this.SkipDefaultCallbacks.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.IgnoreMissingMigrations.FullName)) this.IgnoreMissingMigrations.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.IgnoreIgnoredMigrations.FullName)) this.IgnoreIgnoredMigrations.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.IgnorePendingMigrations.FullName)) this.IgnorePendingMigrations.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.IgnoreFutureMigrations.FullName)) this.IgnoreFutureMigrations.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Mixed.FullName)) this.Mixed.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Group.FullName)) this.Group.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.InstalledBy.FullName)) this.InstalledBy.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.ErrorOverrides.FullName)) this.ErrorOverrides.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.DryRunOutput.FullName)) this.DryRunOutput.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.OracleSqlplus.FullName)) this.OracleSqlplus.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Encoding.FullName)) this.Encoding.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.LicenseKey.FullName)) this.LicenseKey.Value = ReadValue<string>(line);
+                if(string.IsNullOrWhiteSpace(line))
+                {
+                    continue;
+                } else if(line.StartsWith(Url.FullName))
+                {
+                    Url.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Driver.FullName))
+                {
+                    Driver.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(User.FullName))
+                {
+                    User.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Password.FullName))
+                {
+                    Password.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(ConnectRetries.FullName))
+                {
+                    ConnectRetries.Value = ReadValue<ushort?>(line);
+                } else if(line.StartsWith(InitSql.FullName))
+                {
+                    InitSql.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Schemas.FullName))
+                {
+                    Schemas.Value = ReadListValue<string>(line);
+                } else if(line.StartsWith(Table.FullName))
+                {
+                    Table.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Locations.FullName))
+                {
+                    Locations.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Resolvers.FullName))
+                {
+                    Resolvers.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(SkipDefaultResolvers.FullName))
+                {
+                    SkipDefaultResolvers.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(JarDirs.FullName))
+                {
+                    JarDirs.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(SqlMigrationPrefix.FullName))
+                {
+                    SqlMigrationPrefix.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(UndoSqlMigrationPrefix.FullName))
+                {
+                    UndoSqlMigrationPrefix.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(RepeatableSqlMigrationPrefix.FullName))
+                {
+                    RepeatableSqlMigrationPrefix.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(SqlMigrationSeparator.FullName))
+                {
+                    SqlMigrationSeparator.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(SqlMigrationSuffixes.FullName))
+                {
+                    SqlMigrationSuffixes.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Stream.FullName))
+                {
+                    Stream.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(Batch.FullName))
+                {
+                    Batch.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(PlaceholderReplacement.FullName))
+                {
+                    PlaceholderReplacement.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(Placeholders.FullName))
+                {
+                    ReadKeyValuePairValue(Placeholders, line);
+                } else if(line.StartsWith(PlaceholderPrefix.FullName))
+                {
+                    PlaceholderPrefix.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(PlaceholderSuffix.FullName))
+                {
+                    PlaceholderSuffix.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Target.FullName))
+                {
+                    Target.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(ValidateOnMigrate.FullName))
+                {
+                    ValidateOnMigrate.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(CleanOnValidationError.FullName))
+                {
+                    CleanOnValidationError.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(CleanDisabled.FullName))
+                {
+                    CleanDisabled.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(BaselineVersion.FullName))
+                {
+                    BaselineVersion.Value = ReadValue<uint?>(line);
+                } else if(line.StartsWith(BaselineDescription.FullName))
+                {
+                    BaselineDescription.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(BaselineOnMigrate.FullName))
+                {
+                    BaselineOnMigrate.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(OutOfOrder.FullName))
+                {
+                    OutOfOrder.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(Callbacks.FullName))
+                {
+                    Callbacks.Value = ReadListValue<string>(line);
+                } else if(line.StartsWith(SkipDefaultCallbacks.FullName))
+                {
+                    SkipDefaultCallbacks.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(IgnoreMissingMigrations.FullName))
+                {
+                    IgnoreMissingMigrations.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(IgnoreIgnoredMigrations.FullName))
+                {
+                    IgnoreIgnoredMigrations.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(IgnorePendingMigrations.FullName))
+                {
+                    IgnorePendingMigrations.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(IgnoreFutureMigrations.FullName))
+                {
+                    IgnoreFutureMigrations.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(Mixed.FullName))
+                {
+                    Mixed.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(Group.FullName))
+                {
+                    Group.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(InstalledBy.FullName))
+                {
+                    InstalledBy.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(ErrorOverrides.FullName))
+                {
+                    ErrorOverrides.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(DryRunOutput.FullName))
+                {
+                    DryRunOutput.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(OracleSqlplus.FullName))
+                {
+                    OracleSqlplus.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Encoding.FullName))
+                {
+                    Encoding.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(LicenseKey.FullName))
+                {
+                    LicenseKey.Value = ReadValue<string>(line);
+                }
             }
 
             return this;
@@ -274,60 +372,60 @@ namespace Flyway.net
 
         public void Save()
         {
-            if(!this.IsInMemory)
+            if(!IsInMemory)
             {
-                this.Saver(this.ConfigurationFilePath, Regex.Replace(this.ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline));
+                Saver(ConfigurationFilePath, Regex.Replace(ToString(), @"^\s+$[\r\n]*", string.Empty, RegexOptions.Multiline));
             }
         }
 
         public override string ToString()
         {
-            var config = new StringBuilder();
-            config.AppendLine(this.Url.Formatted());
-            config.AppendLine(this.Driver.Formatted());
-            config.AppendLine(this.User.Formatted());
-            config.AppendLine(this.Password.Formatted());
-            config.AppendLine(this.ConnectRetries.Formatted());
-            config.AppendLine(this.InitSql.Formatted());
-            config.AppendLine(this.Schemas.Formatted());
-            config.AppendLine(this.Table.Formatted());
-            config.AppendLine(this.Locations.Formatted());
-            config.AppendLine(this.Resolvers.Formatted());
-            config.AppendLine(this.SkipDefaultResolvers.Formatted());
-            config.AppendLine(this.JarDirs.Formatted());
-            config.AppendLine(this.SqlMigrationPrefix.Formatted());
-            config.AppendLine(this.UndoSqlMigrationPrefix.Formatted());
-            config.AppendLine(this.RepeatableSqlMigrationPrefix.Formatted());
-            config.AppendLine(this.SqlMigrationSeparator.Formatted());
-            config.AppendLine(this.SqlMigrationSuffixes.Formatted());
-            config.AppendLine(this.Stream.Formatted());
-            config.AppendLine(this.Batch.Formatted());
-            config.AppendLine(this.PlaceholderReplacement.Formatted());
-            config.AppendLine(this.Placeholders.Formatted());
-            config.AppendLine(this.PlaceholderPrefix.Formatted());
-            config.AppendLine(this.PlaceholderSuffix.Formatted());
-            config.AppendLine(this.Target.Formatted());
-            config.AppendLine(this.ValidateOnMigrate.Formatted());
-            config.AppendLine(this.CleanOnValidationError.Formatted());
-            config.AppendLine(this.CleanDisabled.Formatted());
-            config.AppendLine(this.BaselineVersion.Formatted());
-            config.AppendLine(this.BaselineDescription.Formatted());
-            config.AppendLine(this.BaselineOnMigrate.Formatted());
-            config.AppendLine(this.OutOfOrder.Formatted());
-            config.AppendLine(this.Callbacks.Formatted());
-            config.AppendLine(this.SkipDefaultCallbacks.Formatted());
-            config.AppendLine(this.IgnoreMissingMigrations.Formatted());
-            config.AppendLine(this.IgnoreIgnoredMigrations.Formatted());
-            config.AppendLine(this.IgnorePendingMigrations.Formatted());
-            config.AppendLine(this.IgnoreFutureMigrations.Formatted());
-            config.AppendLine(this.Mixed.Formatted());
-            config.AppendLine(this.Group.Formatted());
-            config.AppendLine(this.InstalledBy.Formatted());
-            config.AppendLine(this.ErrorOverrides.Formatted());
-            config.AppendLine(this.DryRunOutput.Formatted());
-            config.AppendLine(this.OracleSqlplus.Formatted());
-            config.AppendLine(this.Encoding.Formatted());
-            config.AppendLine(this.LicenseKey.Formatted());
+            StringBuilder config = new StringBuilder();
+            config.AppendLine(Url.Formatted());
+            config.AppendLine(Driver.Formatted());
+            config.AppendLine(User.Formatted());
+            config.AppendLine(Password.Formatted());
+            config.AppendLine(ConnectRetries.Formatted());
+            config.AppendLine(InitSql.Formatted());
+            config.AppendLine(Schemas.Formatted());
+            config.AppendLine(Table.Formatted());
+            config.AppendLine(Locations.Formatted());
+            config.AppendLine(Resolvers.Formatted());
+            config.AppendLine(SkipDefaultResolvers.Formatted());
+            config.AppendLine(JarDirs.Formatted());
+            config.AppendLine(SqlMigrationPrefix.Formatted());
+            config.AppendLine(UndoSqlMigrationPrefix.Formatted());
+            config.AppendLine(RepeatableSqlMigrationPrefix.Formatted());
+            config.AppendLine(SqlMigrationSeparator.Formatted());
+            config.AppendLine(SqlMigrationSuffixes.Formatted());
+            config.AppendLine(Stream.Formatted());
+            config.AppendLine(Batch.Formatted());
+            config.AppendLine(PlaceholderReplacement.Formatted());
+            config.AppendLine(Placeholders.Formatted());
+            config.AppendLine(PlaceholderPrefix.Formatted());
+            config.AppendLine(PlaceholderSuffix.Formatted());
+            config.AppendLine(Target.Formatted());
+            config.AppendLine(ValidateOnMigrate.Formatted());
+            config.AppendLine(CleanOnValidationError.Formatted());
+            config.AppendLine(CleanDisabled.Formatted());
+            config.AppendLine(BaselineVersion.Formatted());
+            config.AppendLine(BaselineDescription.Formatted());
+            config.AppendLine(BaselineOnMigrate.Formatted());
+            config.AppendLine(OutOfOrder.Formatted());
+            config.AppendLine(Callbacks.Formatted());
+            config.AppendLine(SkipDefaultCallbacks.Formatted());
+            config.AppendLine(IgnoreMissingMigrations.Formatted());
+            config.AppendLine(IgnoreIgnoredMigrations.Formatted());
+            config.AppendLine(IgnorePendingMigrations.Formatted());
+            config.AppendLine(IgnoreFutureMigrations.Formatted());
+            config.AppendLine(Mixed.Formatted());
+            config.AppendLine(Group.Formatted());
+            config.AppendLine(InstalledBy.Formatted());
+            config.AppendLine(ErrorOverrides.Formatted());
+            config.AppendLine(DryRunOutput.Formatted());
+            config.AppendLine(OracleSqlplus.Formatted());
+            config.AppendLine(Encoding.Formatted());
+            config.AppendLine(LicenseKey.Formatted());
 
             return config.ToString().Trim();
         }

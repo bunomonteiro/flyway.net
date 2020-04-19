@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
-namespace Flyway.net
+namespace Flyway.net.OptionGroups
 {
     /// <summary>
     /// https://flywaydb.org/documentation/commandline/baseline
@@ -25,25 +23,25 @@ namespace Flyway.net
 
         public FlywayBaselineOptionGroup()
         {
-            this.Url = new FlywayUrlOption();
-            this.Driver = new FlywayDriverOption();
-            this.User = new FlywayUserOption();
-            this.Password = new FlywayPasswordOption();
-            this.ConnectRetries = new FlywayConnectRetriesOption();
-            this.InitSql = new FlywayInitSqlOption();
-            this.Schemas = new FlywaySchemasOption();
-            this.Table = new FlywayTableOption();
-            this.JarDirs = new FlywayJarDirsOption();
-            this.Callbacks = new FlywayCallbacksOption();
-            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
-            this.BaselineVersion = new FlywayBaselineVersionOption();
-            this.BaselineDescription = new FlywayBaselineDescriptionOption();
-            this.LicenseKey = new FlywayLicenseKeyOption();
+            Url = new FlywayUrlOption();
+            Driver = new FlywayDriverOption();
+            User = new FlywayUserOption();
+            Password = new FlywayPasswordOption();
+            ConnectRetries = new FlywayConnectRetriesOption();
+            InitSql = new FlywayInitSqlOption();
+            Schemas = new FlywaySchemasOption();
+            Table = new FlywayTableOption();
+            JarDirs = new FlywayJarDirsOption();
+            Callbacks = new FlywayCallbacksOption();
+            SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
+            BaselineVersion = new FlywayBaselineVersionOption();
+            BaselineDescription = new FlywayBaselineDescriptionOption();
+            LicenseKey = new FlywayLicenseKeyOption();
         }
 
         public override string ToArgs()
         {
-            var options = new List<string>
+            List<string> options = new List<string>
             {
                 Url.Formatted(),
                 Driver.Formatted(),
@@ -66,7 +64,7 @@ namespace Flyway.net
 
         public static implicit operator FlywayBaselineOptionGroup(FlywayConfiguration configuration)
         {
-            var options = new FlywayBaselineOptionGroup();
+            FlywayBaselineOptionGroup options = new FlywayBaselineOptionGroup();
             options.BaselineDescription.Value = configuration.BaselineDescription.Value;
             options.BaselineVersion.Value = configuration.BaselineVersion.Value;
             options.Callbacks.Value = configuration.Callbacks.Value;

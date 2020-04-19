@@ -8,15 +8,44 @@ namespace Flyway.net
         public const string File = "flyway.";
         internal string Value { get; set; }
 
-        public Prefix(string prefix = Cli) => this.Value = prefix ?? Cli;
+        public Prefix(string prefix = Cli)
+        {
+            Value = prefix ?? Cli;
+        }
 
-        public override string ToString() => Value;
-        public override bool Equals(object obj) => this == Convert.ToString(obj);
-        public override int GetHashCode() => this.Value.GetHashCode();
-        public static bool operator ==(Prefix left, Prefix right) => left.Equals(right);
-        public static bool operator !=(Prefix left, Prefix right) => !(left == right);
-        
-        public static implicit operator string(Prefix prefix) => prefix.ToString();
-        public static implicit operator Prefix(string prefix) => new Prefix(prefix);
+        public override string ToString()
+        {
+            return Value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this == Convert.ToString(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public static bool operator ==(Prefix left, Prefix right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(Prefix left, Prefix right)
+        {
+            return !(left == right);
+        }
+
+        public static implicit operator string(Prefix prefix)
+        {
+            return prefix.ToString();
+        }
+
+        public static implicit operator Prefix(string prefix)
+        {
+            return new Prefix(prefix);
+        }
     }
 }

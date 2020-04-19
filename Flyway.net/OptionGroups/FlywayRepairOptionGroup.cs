@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
-namespace Flyway.net
+namespace Flyway.net.OptionGroups
 {
     /// <summary>
     /// https://flywaydb.org/documentation/commandline/repair
@@ -36,36 +34,36 @@ namespace Flyway.net
 
         public FlywayRepairOptionGroup()
         {
-            this.Url = new FlywayUrlOption();
-            this.Driver = new FlywayDriverOption();
-            this.User = new FlywayUserOption();
-            this.Password = new FlywayPasswordOption();
-            this.ConnectRetries = new FlywayConnectRetriesOption();
-            this.InitSql = new FlywayInitSqlOption();
-            this.Schemas = new FlywaySchemasOption();
-            this.Table = new FlywayTableOption();
-            this.Locations = new FlywayLocationsOption();
-            this.JarDirs = new FlywayJarDirsOption();
-            this.SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption();
-            this.UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption();
-            this.RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption();
-            this.SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption();
-            this.SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption();
-            this.Encoding = new FlywayEncodingOption();
-            this.PlaceholderReplacement = new FlywayPlaceholderReplacementOption();
-            this.Placeholders = new FlywayPlaceholdersOption();
-            this.PlaceholderPrefix = new FlywayPlaceholderPrefixOption();
-            this.PlaceholderSuffix = new FlywayPlaceholderSuffixOption();
-            this.Resolvers = new FlywayResolversOption();
-            this.SkipDefaultResolvers = new FlywaySkipDefaultResolversOption();
-            this.Callbacks = new FlywayCallbacksOption();
-            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
-            this.LicenseKey = new FlywayLicenseKeyOption();
+            Url = new FlywayUrlOption();
+            Driver = new FlywayDriverOption();
+            User = new FlywayUserOption();
+            Password = new FlywayPasswordOption();
+            ConnectRetries = new FlywayConnectRetriesOption();
+            InitSql = new FlywayInitSqlOption();
+            Schemas = new FlywaySchemasOption();
+            Table = new FlywayTableOption();
+            Locations = new FlywayLocationsOption();
+            JarDirs = new FlywayJarDirsOption();
+            SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption();
+            UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption();
+            RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption();
+            SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption();
+            SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption();
+            Encoding = new FlywayEncodingOption();
+            PlaceholderReplacement = new FlywayPlaceholderReplacementOption();
+            Placeholders = new FlywayPlaceholdersOption();
+            PlaceholderPrefix = new FlywayPlaceholderPrefixOption();
+            PlaceholderSuffix = new FlywayPlaceholderSuffixOption();
+            Resolvers = new FlywayResolversOption();
+            SkipDefaultResolvers = new FlywaySkipDefaultResolversOption();
+            Callbacks = new FlywayCallbacksOption();
+            SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
+            LicenseKey = new FlywayLicenseKeyOption();
         }
 
         public override string ToArgs()
         {
-            var options = new List<string>
+            List<string> options = new List<string>
             {
                 Url.Formatted(),
                 Driver.Formatted(),
@@ -99,7 +97,7 @@ namespace Flyway.net
 
         public static implicit operator FlywayRepairOptionGroup(FlywayConfiguration configuration)
         {
-            var options = new FlywayRepairOptionGroup();
+            FlywayRepairOptionGroup options = new FlywayRepairOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;
             options.User.Value = configuration.User.Value;

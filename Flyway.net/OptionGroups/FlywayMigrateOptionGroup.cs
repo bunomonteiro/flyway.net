@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
-namespace Flyway.net
+namespace Flyway.net.OptionGroups
 {
     /// <summary>
     /// https://flywaydb.org/documentation/commandline/migrate
@@ -55,55 +53,55 @@ namespace Flyway.net
 
         public FlywayMigrateOptionGroup()
         {
-            this.Url = new FlywayUrlOption();
-            this.Driver = new FlywayDriverOption();
-            this.User = new FlywayUserOption();
-            this.Password = new FlywayPasswordOption();
-            this.ConnectRetries = new FlywayConnectRetriesOption();
-            this.InitSql = new FlywayInitSqlOption();
-            this.Schemas = new FlywaySchemasOption();
-            this.Table = new FlywayTableOption();
-            this.Locations = new FlywayLocationsOption();
-            this.JarDirs = new FlywayJarDirsOption();
-            this.SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption();
-            this.UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption();
-            this.RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption();
-            this.SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption();
-            this.SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption();
-            this.Stream = new FlywayStreamOption();
-            this.Batch = new FlywayBatchOption();
-            this.Mixed = new FlywayMixedOption();
-            this.Group = new FlywayGroupOption();
-            this.Encoding = new FlywayEncodingOption();
-            this.PlaceholderReplacement = new FlywayPlaceholderReplacementOption();
-            this.Placeholders = new FlywayPlaceholdersOption();
-            this.PlaceholderPrefix = new FlywayPlaceholderPrefixOption();
-            this.PlaceholderSuffix = new FlywayPlaceholderSuffixOption();
-            this.Resolvers = new FlywayResolversOption();
-            this.SkipDefaultResolvers = new FlywaySkipDefaultResolversOption();
-            this.Callbacks = new FlywayCallbacksOption();
-            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
-            this.Target = new FlywayTargetOption();
-            this.OutOfOrder = new FlywayOutOfOrderOption();
-            this.ValidateOnMigrate = new FlywayValidateOnMigrateOption();
-            this.CleanOnValidationError = new FlywayCleanOnValidationErrorOption();
-            this.IgnoreMissingMigrations = new FlywayIgnoreMissingMigrationsOption();
-            this.IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption();
-            this.IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption();
-            this.CleanDisabled = new FlywayCleanDisabledOption();
-            this.BaselineOnMigrate = new FlywayBaselineOnMigrateOption();
-            this.BaselineVersion = new FlywayBaselineVersionOption();
-            this.BaselineDescription = new FlywayBaselineDescriptionOption();
-            this.InstalledBy = new FlywayInstalledByOption();
-            this.ErrorOverrides = new FlywayErrorOverridesOption();
-            this.DryRunOutput = new FlywayDryRunOutputOption();
-            this.OracleSqlplus = new FlywayOracleSqlplusOption();
-            this.LicenseKey = new FlywayLicenseKeyOption();
+            Url = new FlywayUrlOption();
+            Driver = new FlywayDriverOption();
+            User = new FlywayUserOption();
+            Password = new FlywayPasswordOption();
+            ConnectRetries = new FlywayConnectRetriesOption();
+            InitSql = new FlywayInitSqlOption();
+            Schemas = new FlywaySchemasOption();
+            Table = new FlywayTableOption();
+            Locations = new FlywayLocationsOption();
+            JarDirs = new FlywayJarDirsOption();
+            SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption();
+            UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption();
+            RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption();
+            SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption();
+            SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption();
+            Stream = new FlywayStreamOption();
+            Batch = new FlywayBatchOption();
+            Mixed = new FlywayMixedOption();
+            Group = new FlywayGroupOption();
+            Encoding = new FlywayEncodingOption();
+            PlaceholderReplacement = new FlywayPlaceholderReplacementOption();
+            Placeholders = new FlywayPlaceholdersOption();
+            PlaceholderPrefix = new FlywayPlaceholderPrefixOption();
+            PlaceholderSuffix = new FlywayPlaceholderSuffixOption();
+            Resolvers = new FlywayResolversOption();
+            SkipDefaultResolvers = new FlywaySkipDefaultResolversOption();
+            Callbacks = new FlywayCallbacksOption();
+            SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
+            Target = new FlywayTargetOption();
+            OutOfOrder = new FlywayOutOfOrderOption();
+            ValidateOnMigrate = new FlywayValidateOnMigrateOption();
+            CleanOnValidationError = new FlywayCleanOnValidationErrorOption();
+            IgnoreMissingMigrations = new FlywayIgnoreMissingMigrationsOption();
+            IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption();
+            IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption();
+            CleanDisabled = new FlywayCleanDisabledOption();
+            BaselineOnMigrate = new FlywayBaselineOnMigrateOption();
+            BaselineVersion = new FlywayBaselineVersionOption();
+            BaselineDescription = new FlywayBaselineDescriptionOption();
+            InstalledBy = new FlywayInstalledByOption();
+            ErrorOverrides = new FlywayErrorOverridesOption();
+            DryRunOutput = new FlywayDryRunOutputOption();
+            OracleSqlplus = new FlywayOracleSqlplusOption();
+            LicenseKey = new FlywayLicenseKeyOption();
         }
 
         public override string ToArgs()
         {
-            var options = new List<string>
+            List<string> options = new List<string>
             {
                 Url.Formatted(),
                 Driver.Formatted(),
@@ -156,7 +154,7 @@ namespace Flyway.net
 
         public static implicit operator FlywayMigrateOptionGroup(FlywayConfiguration configuration)
         {
-            var options = new FlywayMigrateOptionGroup();
+            FlywayMigrateOptionGroup options = new FlywayMigrateOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;
             options.User.Value = configuration.User.Value;

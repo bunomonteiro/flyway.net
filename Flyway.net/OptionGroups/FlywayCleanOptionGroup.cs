@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
-namespace Flyway.net
+namespace Flyway.net.OptionGroups
 {
     /// <summary>
     /// https://flywaydb.org/documentation/commandline/clean
@@ -23,23 +21,23 @@ namespace Flyway.net
 
         public FlywayCleanOptionGroup()
         {
-            this.Url = new FlywayUrlOption();
-            this.Driver = new FlywayDriverOption();
-            this.User = new FlywayUserOption();
-            this.Password = new FlywayPasswordOption();
-            this.ConnectRetries = new FlywayConnectRetriesOption();
-            this.InitSql = new FlywayInitSqlOption();
-            this.Schemas = new FlywaySchemasOption();
-            this.JarDirs = new FlywayJarDirsOption();
-            this.Callbacks = new FlywayCallbacksOption();
-            this.SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
-            this.CleanDisabled = new FlywayCleanDisabledOption();
-            this.LicenseKey = new FlywayLicenseKeyOption();
+            Url = new FlywayUrlOption();
+            Driver = new FlywayDriverOption();
+            User = new FlywayUserOption();
+            Password = new FlywayPasswordOption();
+            ConnectRetries = new FlywayConnectRetriesOption();
+            InitSql = new FlywayInitSqlOption();
+            Schemas = new FlywaySchemasOption();
+            JarDirs = new FlywayJarDirsOption();
+            Callbacks = new FlywayCallbacksOption();
+            SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
+            CleanDisabled = new FlywayCleanDisabledOption();
+            LicenseKey = new FlywayLicenseKeyOption();
         }
 
         public override string ToArgs()
         {
-            var options = new List<string>
+            List<string> options = new List<string>
             {
                 Url.Formatted(),
                 Driver.Formatted(),
@@ -60,7 +58,7 @@ namespace Flyway.net
 
         public static implicit operator FlywayCleanOptionGroup(FlywayConfiguration configuration)
         {
-            var options = new FlywayCleanOptionGroup();
+            FlywayCleanOptionGroup options = new FlywayCleanOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;
             options.User.Value = configuration.User.Value;
