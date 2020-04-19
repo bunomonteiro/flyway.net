@@ -8,7 +8,7 @@ namespace Flyway.net
         public const string File = "flyway.";
         internal string Value { get; set; }
 
-        public Prefix(string prefix = Cli) => this.Value = prefix ?? String.Empty;
+        public Prefix(string prefix = Cli) => this.Value = prefix ?? Cli;
 
         public override string ToString() => Value;
         public override bool Equals(object obj) => this == Convert.ToString(obj);

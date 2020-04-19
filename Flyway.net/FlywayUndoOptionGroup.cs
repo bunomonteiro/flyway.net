@@ -85,44 +85,45 @@ namespace Flyway.net
 
         public override string ToArgs()
         {
-            var options = new List<string>();
+            var options = new List<string>
+            {
+                this.Url.Formatted(),
+                this.Driver.Formatted(),
+                this.User.Formatted(),
+                this.Password.Formatted(),
+                this.ConnectRetries.Formatted(),
+                this.InitSql.Formatted(),
+                this.Schemas.Formatted(),
+                this.Table.Formatted(),
+                this.Locations.Formatted(),
+                this.JarDirs.Formatted(),
+                this.SqlMigrationPrefix.Formatted(),
+                this.UndoSqlMigrationPrefix.Formatted(),
+                this.RepeatableSqlMigrationPrefix.Formatted(),
+                this.SqlMigrationSeparator.Formatted(),
+                this.SqlMigrationSuffixes.Formatted(),
+                this.Mixed.Formatted(),
+                this.Group.Formatted(),
+                this.Encoding.Formatted(),
+                this.PlaceholderReplacement.Formatted(),
+                this.Placeholders.Formatted(),
+                this.PlaceholderPrefix.Formatted(),
+                this.PlaceholderSuffix.Formatted(),
+                this.SkipDefaultResolvers.Formatted(),
+                this.Callbacks.Formatted(),
+                this.SkipDefaultCallbacks.Formatted(),
+                this.Target.Formatted(),
+                this.IgnoreMissingMigrations.Formatted(),
+                this.IgnoreIgnoredMigrations.Formatted(),
+                this.IgnoreFutureMigrations.Formatted(),
+                this.InstalledBy.Formatted(),
+                this.ErrorOverrides.Formatted(),
+                this.DryRunOutput.Formatted(),
+                this.OracleSqlplus.Formatted(),
+                this.LicenseKey.Formatted()
+            };
 
-            options.Add(this.Url.Formatted());
-            options.Add(this.Driver.Formatted());
-            options.Add(this.User.Formatted());
-            options.Add(this.Password.Formatted());
-            options.Add(this.ConnectRetries.Formatted());
-            options.Add(this.InitSql.Formatted());
-            options.Add(this.Schemas.Formatted());
-            options.Add(this.Table.Formatted());
-            options.Add(this.Locations.Formatted());
-            options.Add(this.JarDirs.Formatted());
-            options.Add(this.SqlMigrationPrefix.Formatted());
-            options.Add(this.UndoSqlMigrationPrefix.Formatted());
-            options.Add(this.RepeatableSqlMigrationPrefix.Formatted());
-            options.Add(this.SqlMigrationSeparator.Formatted());
-            options.Add(this.SqlMigrationSuffixes.Formatted());
-            options.Add(this.Mixed.Formatted());
-            options.Add(this.Group.Formatted());
-            options.Add(this.Encoding.Formatted());
-            options.Add(this.PlaceholderReplacement.Formatted());
-            options.Add(this.Placeholders.Formatted());
-            options.Add(this.PlaceholderPrefix.Formatted());
-            options.Add(this.PlaceholderSuffix.Formatted());
-            options.Add(this.SkipDefaultResolvers.Formatted());
-            options.Add(this.Callbacks.Formatted());
-            options.Add(this.SkipDefaultCallbacks.Formatted());
-            options.Add(this.Target.Formatted());
-            options.Add(this.IgnoreMissingMigrations.Formatted());
-            options.Add(this.IgnoreIgnoredMigrations.Formatted());
-            options.Add(this.IgnoreFutureMigrations.Formatted());
-            options.Add(this.InstalledBy.Formatted());
-            options.Add(this.ErrorOverrides.Formatted());
-            options.Add(this.DryRunOutput.Formatted());
-            options.Add(this.OracleSqlplus.Formatted());
-            options.Add(this.LicenseKey.Formatted());
-
-            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Trim()));
+            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Replace("\r\n", " ").Trim()));
         }
 
         public static implicit operator FlywayUndoOptionGroup(FlywayConfiguration configuration)

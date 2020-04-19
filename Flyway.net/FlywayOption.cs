@@ -14,7 +14,7 @@ namespace Flyway.net
         public bool Required { get; private set; }
         public bool IsProFeature { get; private set; }
 
-        public FlywayOption(string name, bool required = false, Prefix prefix = new Prefix(), bool isProFeature = false)
+        public FlywayOption(string name, bool required = false, string prefix = "-", bool isProFeature = false)
         {
             if(String.IsNullOrWhiteSpace(name))
             {
@@ -32,18 +32,69 @@ namespace Flyway.net
         {
             if(!object.Equals(default(T), Value))
             {
-                if(typeof(T) == typeof(bool?))
+                var tType = typeof(T);
+                if(tType == typeof(bool?)) // boolean
                 {
                     return Convert.ToString(this.Value).ToLower();
                 }
-                else
-                {
-                    return Convert.ToString(this.Value).Trim();
-                }
+                
+                return Convert.ToString(this.Value).Trim();
             }
-            else
+            
+            return string.Empty;
+        }
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1012:Abstract types should not have constructors", Justification = "<Pending>")]
+    public abstract class FlywayListOption<T> : FlywayOption<List<T>>
+    {
+        public override List<T> Value
+        {
+            get => base.Value = (base.Value ?? new List<T>());
+            set => base.Value = value;
+        }
+
+        public FlywayListOption(string name , bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+
+        public override string Formatted()
+        {
+            return !object.Equals(default(List<T>), Value) && Value.Any()
+                ? $"{this.FullName}={String.Join(",", this.Value)}"
+                : String.Empty;
+        }
+
+        public override string ToString()
+        {
+            return !object.Equals(default(List<T>), Value) && Value.Any()
+                ? $"{this.Name}={String.Join(",", this.Value)}"
+                : String.Empty;
+        }
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1012:Abstract types should not have constructors", Justification = "<Pending>")]
+    public abstract class FlywayDictionaryOption<TKey, TValue> : FlywayOption<Dictionary<TKey, TValue>>
+    {
+        public override Dictionary<TKey, TValue> Value
+        {
+            get => base.Value = (base.Value ?? new Dictionary<TKey, TValue>());
+            set => base.Value = value;
+        }
+
+        public FlywayDictionaryOption(string name , bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+
+        public override string Formatted() => String.Join("\r\n", this.Values(true)).Trim();
+        public override string ToString() => String.Join("\r\n", this.Values()).Trim();
+
+        private string[] Values(bool fullname = false)
+        {
+            if(!object.Equals(default(Dictionary<TKey, TValue>), Value))
             {
-                return string.Empty;
+                return this.Value.Select(item => $"{(fullname ? this.FullName : this.Name)}.{item.Key}={item.Value}").ToArray();
+            } else
+            {
+                return Array.Empty<string>();
             }
         }
     }
@@ -84,9 +135,9 @@ namespace Flyway.net
         public FlywayInitSqlOption(string name = "initSql", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }
-    public class FlywaySchemasOption : FlywayOption<string>
+    public class FlywaySchemasOption : FlywayListOption<string>
     {
-        public FlywaySchemasOption(string @value) : base("schemas") { this.Value = @value; }
+        public FlywaySchemasOption(List<string> @value) : base("schemas") { this.Value = @value; }
         public FlywaySchemasOption(string name = "schemas", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }
@@ -174,33 +225,11 @@ namespace Flyway.net
         public FlywayPlaceholderReplacementOption(string name = "placeholderReplacement", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }
-    public class FlywayPlaceholdersOption : FlywayOption<Dictionary<string, string>>
+    public class FlywayPlaceholdersOption : FlywayDictionaryOption<string, string>
     {
-        public override Dictionary<string, string> Value
-        {
-            get => base.Value;
-            set => base.Value = value ?? new Dictionary<string, string>();
-        }
-        public FlywayPlaceholdersOption(Dictionary<string, string> @value) : base("placeholders")
-        {
-            this.Value = @value ?? new Dictionary<string, string>();
-        }
+        public FlywayPlaceholdersOption(Dictionary<string, string> @value) : base("placeholders") { this.Value = @value; }
         public FlywayPlaceholdersOption(string name = "placeholders", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { this.Value = new Dictionary<string, string>(); }
-
-        public override string Formatted() => String.Join(" ", this.Values(true)).Trim();
-        public override string ToString() => String.Join(" ", this.Values()).Trim();
-
-        private string[] Values(bool fullname = false)
-        {
-            if(!object.Equals(default(Dictionary<string, string>), Value))
-            {
-                return this.Value.Select(item => $"{(fullname ? this.FullName : this.Name)}.{item.Key}={item.Value}").ToArray();
-            } else
-            {
-                return Array.Empty<string>();
-            }
-        }
     }
     public class FlywayPlaceholderPrefixOption : FlywayOption<string>
     {
@@ -226,33 +255,11 @@ namespace Flyway.net
         public FlywaySkipDefaultResolversOption(string name = "skipDefaultResolvers", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }
-    public class FlywayCallbacksOption : FlywayOption<List<string>>
+    public class FlywayCallbacksOption : FlywayListOption<string>
     {
-        public override List<string> Value
-        {
-            get => base.Value;
-            set => base.Value = value ?? new List<string>();
-        }
-        public FlywayCallbacksOption(List<string> @value) : base("callbacks")
-        {
-            this.Value = @value ?? new List<string>();
-        }
+        public FlywayCallbacksOption(List<string> @value) : base("callbacks") { this.Value = @value; }
         public FlywayCallbacksOption(string name = "callbacks", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { this.Value = new List<string>(); }
-
-        public override string Formatted()
-        {
-            return !object.Equals(default(List<string>), Value) && Value.Any()
-                ? $"{this.FullName}={String.Join(",", this.Value)}"
-                : String.Empty;
-        }
-
-        public override string ToString()
-        {
-            return !object.Equals(default(List<string>), Value) && Value.Any()
-                ? $"{this.Name}={String.Join(",", this.Value)}"
-                : String.Empty;
-        }
     }
     public class FlywaySkipDefaultCallbacksOption : FlywayOption<bool?>
     {

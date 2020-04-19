@@ -103,54 +103,55 @@ namespace Flyway.net
 
         public override string ToArgs()
         {
-            var options = new List<string>();
+            var options = new List<string>
+            {
+                Url.Formatted(),
+                Driver.Formatted(),
+                User.Formatted(),
+                Password.Formatted(),
+                ConnectRetries.Formatted(),
+                InitSql.Formatted(),
+                Schemas.Formatted(),
+                Table.Formatted(),
+                Locations.Formatted(),
+                JarDirs.Formatted(),
+                SqlMigrationPrefix.Formatted(),
+                UndoSqlMigrationPrefix.Formatted(),
+                RepeatableSqlMigrationPrefix.Formatted(),
+                SqlMigrationSeparator.Formatted(),
+                SqlMigrationSuffixes.Formatted(),
+                Stream.Formatted(),
+                Batch.Formatted(),
+                Mixed.Formatted(),
+                Group.Formatted(),
+                Encoding.Formatted(),
+                PlaceholderReplacement.Formatted(),
+                Placeholders.Formatted(),
+                PlaceholderPrefix.Formatted(),
+                PlaceholderSuffix.Formatted(),
+                Resolvers.Formatted(),
+                SkipDefaultResolvers.Formatted(),
+                Callbacks.Formatted(),
+                SkipDefaultCallbacks.Formatted(),
+                Target.Formatted(),
+                OutOfOrder.Formatted(),
+                ValidateOnMigrate.Formatted(),
+                CleanOnValidationError.Formatted(),
+                IgnoreMissingMigrations.Formatted(),
+                IgnoreIgnoredMigrations.Formatted(),
+                IgnoreFutureMigrations.Formatted(),
+                CleanDisabled.Formatted(),
+                BaselineOnMigrate.Formatted(),
+                BaselineVersion.Formatted(),
+                BaselineDescription.Formatted(),
+                InstalledBy.Formatted(),
+                ErrorOverrides.Formatted(),
+                DryRunOutput.Formatted(),
+                OracleSqlplus.Formatted(),
+                LicenseKey.Formatted()
+            };
 
-            options.Add(Url.Formatted());
-            options.Add(Driver.Formatted());
-            options.Add(User.Formatted());
-            options.Add(Password.Formatted());
-            options.Add(ConnectRetries.Formatted());
-            options.Add(InitSql.Formatted());
-            options.Add(Schemas.Formatted());
-            options.Add(Table.Formatted());
-            options.Add(Locations.Formatted());
-            options.Add(JarDirs.Formatted());
-            options.Add(SqlMigrationPrefix.Formatted());
-            options.Add(UndoSqlMigrationPrefix.Formatted());
-            options.Add(RepeatableSqlMigrationPrefix.Formatted());
-            options.Add(SqlMigrationSeparator.Formatted());
-            options.Add(SqlMigrationSuffixes.Formatted());
-            options.Add(Stream.Formatted());
-            options.Add(Batch.Formatted());
-            options.Add(Mixed.Formatted());
-            options.Add(Group.Formatted());
-            options.Add(Encoding.Formatted());
-            options.Add(PlaceholderReplacement.Formatted());
-            options.Add(Placeholders.Formatted());
-            options.Add(PlaceholderPrefix.Formatted());
-            options.Add(PlaceholderSuffix.Formatted());
-            options.Add(Resolvers.Formatted());
-            options.Add(SkipDefaultResolvers.Formatted());
-            options.Add(Callbacks.Formatted());
-            options.Add(SkipDefaultCallbacks.Formatted());
-            options.Add(Target.Formatted());
-            options.Add(OutOfOrder.Formatted());
-            options.Add(ValidateOnMigrate.Formatted());
-            options.Add(CleanOnValidationError.Formatted());
-            options.Add(IgnoreMissingMigrations.Formatted());
-            options.Add(IgnoreIgnoredMigrations.Formatted());
-            options.Add(IgnoreFutureMigrations.Formatted());
-            options.Add(CleanDisabled.Formatted());
-            options.Add(BaselineOnMigrate.Formatted());
-            options.Add(BaselineVersion.Formatted());
-            options.Add(BaselineDescription.Formatted());
-            options.Add(InstalledBy.Formatted());
-            options.Add(ErrorOverrides.Formatted());
-            options.Add(DryRunOutput.Formatted());
-            options.Add(OracleSqlplus.Formatted());
-            options.Add(LicenseKey.Formatted());
-
-            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Trim()));
+            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Replace("\r\n", " ").Trim()));
         }
 
         public static implicit operator FlywayMigrateOptionGroup(FlywayConfiguration configuration)

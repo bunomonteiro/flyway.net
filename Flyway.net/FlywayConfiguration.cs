@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -155,6 +156,60 @@ namespace Flyway.net
                 return default;
             }
         }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
+        private void ReadKeyValuePairValue<TKey, TValue>(FlywayDictionaryOption<TKey, TValue> option, string line)
+        {
+            try
+            {
+                Type keyType = typeof(TKey);
+                keyType = Nullable.GetUnderlyingType(keyType) ?? keyType;
+                var keyLine = line.Substring(option.FullName.Length + 1);
+                var key = keyLine.Substring(0, keyLine.IndexOf("=")).Trim();
+
+                if(String.IsNullOrWhiteSpace(key))
+                {
+                    return;
+                }
+
+                if(keyType == typeof(bool?) || keyType == typeof(bool))
+                {
+                    key = key.ToLower();
+                }
+
+                option.Value.Add((TKey)Convert.ChangeType(key, keyType), ReadValue<TValue>(line));
+            } catch(Exception)
+            {
+                return;
+            }
+        }
+        private List<T> ReadListValue<T>(string line)
+        {
+            try
+            {
+                Type type = typeof(T);
+                type = Nullable.GetUnderlyingType(type) ?? type;
+
+                var config = line.Substring(line.IndexOf("=") + 1).Trim();
+
+                if(String.IsNullOrWhiteSpace(config))
+                {
+                    return default;
+                }
+
+                if(type == typeof(bool?) || type == typeof(bool))
+                {
+                    config = config.ToLower();
+                }
+
+                return (List<T>)Convert.ChangeType(config.Split(',').ToList().OfType<T>().ToList(), typeof(List<T>));
+                       
+            } catch(Exception)
+            {
+                return default;
+            }
+        }
+
         public FlywayConfiguration Load()
         {
             if(this.IsInMemory) return this;
@@ -173,7 +228,7 @@ namespace Flyway.net
                 else if(line.StartsWith(this.Password.FullName)) this.Password.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.ConnectRetries.FullName)) this.ConnectRetries.Value = ReadValue<ushort?>(line);
                 else if(line.StartsWith(this.InitSql.FullName)) this.InitSql.Value = ReadValue<string>(line);
-                else if(line.StartsWith(this.Schemas.FullName)) this.Schemas.Value = ReadValue<string>(line);
+                else if(line.StartsWith(this.Schemas.FullName)) this.Schemas.Value = ReadListValue<string>(line);
                 else if(line.StartsWith(this.Table.FullName)) this.Table.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.Locations.FullName)) this.Locations.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.Resolvers.FullName)) this.Resolvers.Value = ReadValue<string>(line);
@@ -187,7 +242,7 @@ namespace Flyway.net
                 else if(line.StartsWith(this.Stream.FullName)) this.Stream.Value = ReadValue<bool?>(line);
                 else if(line.StartsWith(this.Batch.FullName)) this.Batch.Value = ReadValue<bool?>(line);
                 else if(line.StartsWith(this.PlaceholderReplacement.FullName)) this.PlaceholderReplacement.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Placeholders.FullName)) this.Placeholders.Value = ReadValue<Dictionary<string, string>>(line);
+                else if(line.StartsWith(this.Placeholders.FullName)) ReadKeyValuePairValue(this.Placeholders, line);
                 else if(line.StartsWith(this.PlaceholderPrefix.FullName)) this.PlaceholderPrefix.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.PlaceholderSuffix.FullName)) this.PlaceholderSuffix.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.Target.FullName)) this.Target.Value = ReadValue<string>(line);
@@ -198,7 +253,7 @@ namespace Flyway.net
                 else if(line.StartsWith(this.BaselineDescription.FullName)) this.BaselineDescription.Value = ReadValue<string>(line);
                 else if(line.StartsWith(this.BaselineOnMigrate.FullName)) this.BaselineOnMigrate.Value = ReadValue<bool?>(line);
                 else if(line.StartsWith(this.OutOfOrder.FullName)) this.OutOfOrder.Value = ReadValue<bool?>(line);
-                else if(line.StartsWith(this.Callbacks.FullName)) this.Callbacks.Value = ReadValue<List<string>>(line);
+                else if(line.StartsWith(this.Callbacks.FullName)) this.Callbacks.Value = ReadListValue<string>(line);
                 else if(line.StartsWith(this.SkipDefaultCallbacks.FullName)) this.SkipDefaultCallbacks.Value = ReadValue<bool?>(line);
                 else if(line.StartsWith(this.IgnoreMissingMigrations.FullName)) this.IgnoreMissingMigrations.Value = ReadValue<bool?>(line);
                 else if(line.StartsWith(this.IgnoreIgnoredMigrations.FullName)) this.IgnoreIgnoredMigrations.Value = ReadValue<bool?>(line);

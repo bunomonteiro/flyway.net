@@ -43,24 +43,25 @@ namespace Flyway.net
 
         public override string ToArgs()
         {
-            var options = new List<string>();
+            var options = new List<string>
+            {
+                Url.Formatted(),
+                Driver.Formatted(),
+                User.Formatted(),
+                Password.Formatted(),
+                ConnectRetries.Formatted(),
+                InitSql.Formatted(),
+                Schemas.Formatted(),
+                Table.Formatted(),
+                JarDirs.Formatted(),
+                Callbacks.Formatted(),
+                SkipDefaultCallbacks.Formatted(),
+                BaselineVersion.Formatted(),
+                BaselineDescription.Formatted(),
+                LicenseKey.Formatted()
+            };
 
-            options.Add(Url.Formatted());
-            options.Add(Driver.Formatted());
-            options.Add(User.Formatted());
-            options.Add(Password.Formatted());
-            options.Add(ConnectRetries.Formatted());
-            options.Add(InitSql.Formatted());
-            options.Add(Schemas.Formatted());
-            options.Add(Table.Formatted());
-            options.Add(JarDirs.Formatted());
-            options.Add(Callbacks.Formatted());
-            options.Add(SkipDefaultCallbacks.Formatted());
-            options.Add(BaselineVersion.Formatted());
-            options.Add(BaselineDescription.Formatted());
-            options.Add(LicenseKey.Formatted());
-
-            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Trim()));
+            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Replace("\r\n", " ").Trim()));
         }
 
         public static implicit operator FlywayBaselineOptionGroup(FlywayConfiguration configuration)
