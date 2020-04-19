@@ -61,7 +61,7 @@ namespace Flyway.net
                 LicenseKey.Formatted()
             };
 
-            return String.Join(" ", options.Where(v => !String.IsNullOrWhiteSpace(v)).Select(v => v.Replace("\r\n", " ").Trim()));
+            return ToArgs(options);
         }
 
         public static implicit operator FlywayBaselineOptionGroup(FlywayConfiguration configuration)
