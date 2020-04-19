@@ -23,10 +23,12 @@ namespace Flyway.net
 
         protected string ToArgs(IEnumerable<string> options)
         {
-            Func<IEnumerable<string>, IEnumerable<string>> onlyOptionsNotEmpty = (option) => option.Where(value => !String.IsNullOrWhiteSpace(value));
-            Func<string, string> withoutLineBreaks = (line) => line.Replace("\r\n", " ").Trim(); // for dictionary values
-
             return String.Join(" ", onlyOptionsNotEmpty(options).Select(withoutLineBreaks));
+
+
+            IEnumerable<string> onlyOptionsNotEmpty(IEnumerable<string> option) => option.Where(value => !String.IsNullOrWhiteSpace(value));
+            // for dictionary values
+            string withoutLineBreaks(string line) => line.Replace("\r\n", " ").Trim();
         }
     }
 }
