@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Flyway.net.ValueObjects;
 
 namespace Flyway.net
 {
@@ -255,7 +256,7 @@ namespace Flyway.net
                     Table.Value = ReadValue<string>(line);
                 } else if(line.StartsWith(Locations.FullName))
                 {
-                    Locations.Value = ReadValue<string>(line);
+                    Locations.Value = ReadListValue<string>(line);
                 } else if(line.StartsWith(Resolvers.FullName))
                 {
                     Resolvers.Value = ReadValue<string>(line);

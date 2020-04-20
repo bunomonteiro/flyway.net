@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Flyway.net.ValueObjects;
 
 namespace Flyway.net
 {
@@ -157,9 +158,9 @@ namespace Flyway.net
         public FlywayTableOption(string name = "table", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }
-    public class FlywayLocationsOption : FlywayOption<string>
+    public class FlywayLocationsOption : FlywayListOption<string>
     {
-        public FlywayLocationsOption(string @value) : base("locations") { Value = @value; }
+        public FlywayLocationsOption(List<string> @value) : base("locations") { Value = @value; }
         public FlywayLocationsOption(string name = "locations", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }

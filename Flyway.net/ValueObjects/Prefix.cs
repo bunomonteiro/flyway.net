@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Flyway.net
+namespace Flyway.net.ValueObjects
 {
     public struct Prefix
     {
