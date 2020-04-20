@@ -51,7 +51,7 @@ v. 1.0.0 (04/2020)
 - ☑ First Release
 
 v. x
-- ☐ Update compatibility with the current version of [Flyway]
+- ☐ Create the new options/parameters present in the new version of [Flyway].
 
 License
 ----
