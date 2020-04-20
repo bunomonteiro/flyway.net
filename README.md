@@ -1,5 +1,7 @@
 # flyway.net
-A [Flyway] (5.2.4) wrapper for .NET
+A [Flyway] wrapper for .NET
+
+> Written and tested for [Flyway] 5.2.4, but still compatible with higher versions of [Flyway].
 
 ### Maintained by
 [Bruno Monteiro][b'uno], also known as [b'uno].
