@@ -24,6 +24,11 @@ config.Save();
 // with default config (config file)
 await new Flyway("[flyway path]").MigrateAsync();
 
+// with config in memory
+var config = new FlywayConfiguration();
+config.Url.Value = "jdbc:...";
+await new Flyway(config).MigrateAsync();
+
 // with custom config
 await new Flyway("[flyway path]")
   .MigrateAsync(new FlywayMigrateOptionGroup
