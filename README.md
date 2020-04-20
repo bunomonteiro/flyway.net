@@ -1,5 +1,5 @@
 # flyway.net
-A [Flyway] wrapper for .NET
+A [Flyway] (5.2.4) wrapper for .NET
 
 ### Maintained by
 [Bruno Monteiro][b'uno], also known as [b'uno].
@@ -33,6 +33,14 @@ await new Flyway("[flyway path]")
     Password = new FlywayPasswordOption("pw")
   });
 ```
+
+## Todo
+
+v. 1.0.0 (04/2020)
+- ☑ First Release
+
+v. x
+- ☐ Update compatibility with the current version of [Flyway]
 
 License
 ----
