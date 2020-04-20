@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description></Description>
+    <PackageProjectUrl>https://github.com/bunomonteiro/flyway.net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/bunomonteiro/flyway.net</RepositoryUrl>
+    <Authors>Bruno Monteiro</Authors>
+    <Copyright>Bruno Monteiro</Copyright>
+    <RepositoryType>Git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
