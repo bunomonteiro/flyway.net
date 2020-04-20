@@ -7,12 +7,16 @@ A [Flyway] (5.2.4) wrapper for .NET
 ## How to use
 First, download [Flyway commandline] tool
 
-#### Load configurations
+
+#### Install Nuget Package
+    Install-Package Flyway.net
+
+#### Load Configurations
 ```c#
 var config = new FlywayConfiguration("[flyway path]\conf\flyway.conf").Load();
 ```
 
-#### Save configurations
+#### Save Configurations
 ```c#
 var config = new FlywayConfiguration("[flyway path]\conf\flyway.conf");
 config.BaselineDescription.Value = "Some baseline description";
