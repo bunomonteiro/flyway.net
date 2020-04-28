@@ -1,18 +1,24 @@
 # flyway.net
 A [Flyway] wrapper for .NET
 
+> Written and tested for [Flyway] 5.2.4, but still compatible with higher versions of [Flyway].
+
 ### Maintained by
 [Bruno Monteiro][b'uno], also known as [b'uno].
 
 ## How to use
 First, download [Flyway commandline] tool
 
-#### Load configurations
+
+#### Install Nuget Package
+    Install-Package Flyway.net
+
+#### Load Configurations
 ```c#
 var config = new FlywayConfiguration("[flyway path]\conf\flyway.conf").Load();
 ```
 
-#### Save configurations
+#### Save Configurations
 ```c#
 var config = new FlywayConfiguration("[flyway path]\conf\flyway.conf");
 config.BaselineDescription.Value = "Some baseline description";
@@ -24,6 +30,11 @@ config.Save();
 // with default config (config file)
 await new Flyway("[flyway path]").MigrateAsync();
 
+// with config in memory
+var config = new FlywayConfiguration();
+config.Url.Value = "jdbc:...";
+await new Flyway(config).MigrateAsync();
+
 // with custom config
 await new Flyway("[flyway path]")
   .MigrateAsync(new FlywayMigrateOptionGroup
@@ -33,6 +44,14 @@ await new Flyway("[flyway path]")
     Password = new FlywayPasswordOption("pw")
   });
 ```
+
+## Todo
+
+v. 1.0.0 (04/2020)
+- ☑ First Release
+
+v. x
+- ☐ Create the new options/parameters present in the new version of [Flyway].
 
 License
 ----
