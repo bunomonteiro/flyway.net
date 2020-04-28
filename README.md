@@ -53,6 +53,9 @@ v. 1.0.0 (04/2020)
 v. 1.1.0 (28/2020)
 - ☑ Updated to version 6.4.0 of Flyway
 
+v. x
+- ☐ Create the new options/parameters present in the new version of [Flyway].
+
 License
 ----
 
