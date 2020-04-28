@@ -49,9 +49,8 @@ await new Flyway("[flyway path]")
 
 v. 1.0.0 (04/2020)
 - ☑ First Release
-
-v. x
-- ☐ Create the new options/parameters present in the new version of [Flyway].
+v. 1.1.0 (28/2020)
+- ☑ Updated to version 6.4.0 of Flyway
 
 License
 ----
