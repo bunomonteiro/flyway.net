@@ -64,3 +64,4 @@ The **flyway.net** source code is issued under [MIT license][MIT], a permissive 
    [flyway]: <https://github.com/flyway/flyway>
    [flyway commandline]: <https://flywaydb.org/documentation/commandline/#download-and-installation>
    [b'uno]: <http://brunomonteiro.dev>
+   [MIT]: <http://opensource.org/licenses/MIT>
