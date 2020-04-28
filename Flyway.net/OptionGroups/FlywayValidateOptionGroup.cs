@@ -9,15 +9,18 @@ namespace Flyway.net.OptionGroups
         public FlywayPasswordOption Password { get; set; }
         public FlywayConnectRetriesOption ConnectRetries { get; set; }
         public FlywayInitSqlOption InitSql { get; set; }
+        public FlywayDefaultSchemaOption DefaultSchema { get; set; }
         public FlywaySchemasOption Schemas { get; set; }
         public FlywayTableOption Table { get; set; }
         public FlywayLocationsOption Locations { get; set; }
+        public FlywayColorOption Color { get; set; }
         public FlywayJarDirsOption JarDirs { get; set; }
         public FlywaySqlMigrationPrefixOption SqlMigrationPrefix { get; set; }
         public FlywayUndoSqlMigrationPrefixOption UndoSqlMigrationPrefix { get; set; }
         public FlywayRepeatableSqlMigrationPrefixOption RepeatableSqlMigrationPrefix { get; set; }
         public FlywaySqlMigrationSeparatorOption SqlMigrationSeparator { get; set; }
         public FlywaySqlMigrationSuffixesOption SqlMigrationSuffixes { get; set; }
+        public FlywayValidateMigrationNamingOption ValidateMigrationNaming { get; set; }
         public FlywayEncodingOption Encoding { get; set; }
         public FlywayPlaceholderReplacementOption PlaceholderReplacement { get; set; }
         public FlywayPlaceholdersOption Placeholders { get; set; }
@@ -34,6 +37,9 @@ namespace Flyway.net.OptionGroups
         public FlywayIgnoreIgnoredMigrationsOption IgnoreIgnoredMigrations { get; set; }
         public FlywayIgnorePendingMigrationsOption IgnorePendingMigrations { get; set; }
         public FlywayIgnoreFutureMigrationsOption IgnoreFutureMigrations { get; set; }
+        public FlywayOracleSqlplusOption OracleSqlplus { get; set; }
+        public FlywayOracleSqlplusWarnOption OracleSqlplusWarn { get; set; }
+        public FlywayWorkingDirectoryOption WorkingDirectory { get; set; }
         public FlywayLicenseKeyOption LicenseKey { get; set; }
 
         public FlywayValidateOptionGroup()
@@ -44,15 +50,18 @@ namespace Flyway.net.OptionGroups
             Password = new FlywayPasswordOption();
             ConnectRetries = new FlywayConnectRetriesOption();
             InitSql = new FlywayInitSqlOption();
+            DefaultSchema = new FlywayDefaultSchemaOption();
             Schemas = new FlywaySchemasOption();
             Table = new FlywayTableOption();
             Locations = new FlywayLocationsOption();
+            Color = new FlywayColorOption();
             JarDirs = new FlywayJarDirsOption();
             SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption();
             UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption();
             RepeatableSqlMigrationPrefix = new FlywayRepeatableSqlMigrationPrefixOption();
             SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption();
             SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption();
+            ValidateMigrationNaming = new FlywayValidateMigrationNamingOption();
             Encoding = new FlywayEncodingOption();
             PlaceholderReplacement = new FlywayPlaceholderReplacementOption();
             Placeholders = new FlywayPlaceholdersOption();
@@ -69,6 +78,9 @@ namespace Flyway.net.OptionGroups
             IgnoreIgnoredMigrations = new FlywayIgnoreIgnoredMigrationsOption();
             IgnorePendingMigrations = new FlywayIgnorePendingMigrationsOption();
             IgnoreFutureMigrations = new FlywayIgnoreFutureMigrationsOption();
+            OracleSqlplus = new FlywayOracleSqlplusOption();
+            OracleSqlplusWarn = new FlywayOracleSqlplusWarnOption();
+            WorkingDirectory = new FlywayWorkingDirectoryOption();
             LicenseKey = new FlywayLicenseKeyOption();
         }
 
@@ -82,14 +94,17 @@ namespace Flyway.net.OptionGroups
                 Password.Formatted(),
                 ConnectRetries.Formatted(),
                 InitSql.Formatted(),
+                DefaultSchema.Formatted(),
                 Schemas.Formatted(),
                 Table.Formatted(),
                 Locations.Formatted(),
+                Color.Formatted(),
                 JarDirs.Formatted(),
                 SqlMigrationPrefix.Formatted(),
                 UndoSqlMigrationPrefix.Formatted(),
                 RepeatableSqlMigrationPrefix.Formatted(),
                 SqlMigrationSeparator.Formatted(),
+                ValidateMigrationNaming.Formatted(),
                 Encoding.Formatted(),
                 PlaceholderReplacement.Formatted(),
                 Placeholders.Formatted(),
@@ -105,6 +120,9 @@ namespace Flyway.net.OptionGroups
                 IgnoreMissingMigrations.Formatted(),
                 IgnoreIgnoredMigrations.Formatted(),
                 IgnoreFutureMigrations.Formatted(),
+                OracleSqlplus.Formatted(),
+                OracleSqlplusWarn.Formatted(),
+                WorkingDirectory.Formatted(),
                 LicenseKey.Formatted()
             };
 
@@ -120,15 +138,18 @@ namespace Flyway.net.OptionGroups
             options.Password.Value = configuration.Password.Value;
             options.ConnectRetries.Value = configuration.ConnectRetries.Value;
             options.InitSql.Value = configuration.InitSql.Value;
+            options.DefaultSchema.Value = configuration.DefaultSchema.Value;
             options.Schemas.Value = configuration.Schemas.Value;
             options.Table.Value = configuration.Table.Value;
             options.Locations.Value = configuration.Locations.Value;
+            options.Color.Value = configuration.Color.Value;
             options.JarDirs.Value = configuration.JarDirs.Value;
             options.SqlMigrationPrefix.Value = configuration.SqlMigrationPrefix.Value;
             options.UndoSqlMigrationPrefix.Value = configuration.UndoSqlMigrationPrefix.Value;
             options.RepeatableSqlMigrationPrefix.Value = configuration.RepeatableSqlMigrationPrefix.Value;
             options.SqlMigrationSeparator.Value = configuration.SqlMigrationSeparator.Value;
             options.SqlMigrationSuffixes.Value = configuration.SqlMigrationSuffixes.Value;
+            options.ValidateMigrationNaming.Value = configuration.ValidateMigrationNaming.Value;
             options.Encoding.Value = configuration.Encoding.Value;
             options.PlaceholderReplacement.Value = configuration.PlaceholderReplacement.Value;
             options.Placeholders.Value = configuration.Placeholders.Value;
@@ -145,6 +166,9 @@ namespace Flyway.net.OptionGroups
             options.IgnoreIgnoredMigrations.Value = configuration.IgnoreIgnoredMigrations.Value;
             options.IgnorePendingMigrations.Value = configuration.IgnorePendingMigrations.Value;
             options.IgnoreFutureMigrations.Value = configuration.IgnoreFutureMigrations.Value;
+            options.OracleSqlplus.Value = configuration.OracleSqlplus.Value;
+            options.OracleSqlplusWarn.Value = configuration.OracleSqlplusWarn.Value;
+            options.WorkingDirectory.Value = configuration.WorkingDirectory.Value;
             options.LicenseKey.Value = configuration.LicenseKey.Value;
 
             return options;

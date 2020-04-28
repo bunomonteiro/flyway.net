@@ -58,6 +58,13 @@ namespace Flyway.net
         public FlywayOracleSqlplusOption OracleSqlplus { get; private set; }
         public FlywayEncodingOption Encoding { get; private set; }
         public FlywayLicenseKeyOption LicenseKey { get; private set; }
+        public FlywayDefaultSchemaOption DefaultSchema { get; private set; }
+        public FlywayTableSpaceOption TableSpace { get; private set; }
+        public FlywayColorOption Color { get; private set; }
+        public FlywayValidateMigrationNamingOption ValidateMigrationNaming { get; private set; }
+        public FlywayOutputQueryResultsOption OutputQueryResults { get; private set; }
+        public FlywayOracleSqlplusWarnOption OracleSqlplusWarn { get; private set; }
+        public FlywayWorkingDirectoryOption WorkingDirectory { get; private set; }
         #endregion
 
         private Action<string, string> Saver { get; set; }
@@ -130,6 +137,13 @@ namespace Flyway.net
             OracleSqlplus = new FlywayOracleSqlplusOption(prefix: prefix);
             Encoding = new FlywayEncodingOption(prefix: prefix);
             LicenseKey = new FlywayLicenseKeyOption(prefix: prefix);
+            DefaultSchema = new FlywayDefaultSchemaOption(prefix: prefix);
+            TableSpace = new FlywayTableSpaceOption(prefix: prefix);
+            Color = new FlywayColorOption(prefix: prefix);
+            ValidateMigrationNaming = new FlywayValidateMigrationNamingOption(prefix: prefix);
+            OutputQueryResults = new FlywayOutputQueryResultsOption(prefix: prefix);
+            OracleSqlplusWarn = new FlywayOracleSqlplusWarnOption(prefix: prefix);
+            WorkingDirectory = new FlywayWorkingDirectoryOption(prefix: prefix);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "<Pending>")]
@@ -359,13 +373,34 @@ namespace Flyway.net
                     DryRunOutput.Value = ReadValue<string>(line);
                 } else if(line.StartsWith(OracleSqlplus.FullName))
                 {
-                    OracleSqlplus.Value = ReadValue<string>(line);
+                    OracleSqlplus.Value = ReadValue<bool?>(line);
                 } else if(line.StartsWith(Encoding.FullName))
                 {
                     Encoding.Value = ReadValue<string>(line);
                 } else if(line.StartsWith(LicenseKey.FullName))
                 {
                     LicenseKey.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(DefaultSchema.FullName))
+                {
+                    DefaultSchema.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(TableSpace.FullName))
+                {
+                    TableSpace.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(Color.FullName))
+                {
+                    Color.Value = ReadValue<string>(line);
+                } else if(line.StartsWith(ValidateMigrationNaming.FullName))
+                {
+                    ValidateMigrationNaming.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(OutputQueryResults.FullName))
+                {
+                    OutputQueryResults.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(OracleSqlplusWarn.FullName))
+                {
+                    OracleSqlplusWarn.Value = ReadValue<bool?>(line);
+                } else if(line.StartsWith(WorkingDirectory.FullName))
+                {
+                    WorkingDirectory.Value = ReadValue<string>(line);
                 }
             }
 
@@ -428,6 +463,13 @@ namespace Flyway.net
             config.AppendLine(OracleSqlplus.Formatted());
             config.AppendLine(Encoding.Formatted());
             config.AppendLine(LicenseKey.Formatted());
+            config.AppendLine(DefaultSchema.Formatted());
+            config.AppendLine(TableSpace.Formatted());
+            config.AppendLine(Color.Formatted());
+            config.AppendLine(ValidateMigrationNaming.Formatted());
+            config.AppendLine(OutputQueryResults.Formatted());
+            config.AppendLine(OracleSqlplusWarn.Formatted());
+            config.AppendLine(WorkingDirectory.Formatted());
 
             return config.ToString().Trim();
         }

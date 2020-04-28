@@ -12,9 +12,11 @@ namespace Flyway.net.OptionGroups
         public FlywayPasswordOption Password { get; set; }
         public FlywayConnectRetriesOption ConnectRetries { get; set; }
         public FlywayInitSqlOption InitSql { get; set; }
+        public FlywayDefaultSchemaOption DefaultSchema { get; set; }
         public FlywaySchemasOption Schemas { get; set; }
         public FlywayTableOption Table { get; set; }
         public FlywayLocationsOption Locations { get; set; }
+        public FlywayColorOption Color { get; set; }
         public FlywayJarDirsOption JarDirs { get; set; }
         public FlywaySqlMigrationPrefixOption SqlMigrationPrefix { get; set; }
         public FlywayUndoSqlMigrationPrefixOption UndoSqlMigrationPrefix { get; set; }
@@ -22,6 +24,7 @@ namespace Flyway.net.OptionGroups
         public FlywaySqlMigrationSeparatorOption SqlMigrationSeparator { get; set; }
         public FlywaySqlMigrationSuffixesOption SqlMigrationSuffixes { get; set; }
         public FlywayEncodingOption Encoding { get; set; }
+        public FlywayValidateMigrationNamingOption ValidateMigrationNaming { get; set; }
         public FlywayPlaceholderReplacementOption PlaceholderReplacement { get; set; }
         public FlywayPlaceholdersOption Placeholders { get; set; }
         public FlywayPlaceholderPrefixOption PlaceholderPrefix { get; set; }
@@ -30,6 +33,7 @@ namespace Flyway.net.OptionGroups
         public FlywaySkipDefaultResolversOption SkipDefaultResolvers { get; set; }
         public FlywayCallbacksOption Callbacks { get; set; }
         public FlywaySkipDefaultCallbacksOption SkipDefaultCallbacks { get; set; }
+        public FlywayWorkingDirectoryOption WorkingDirectory { get; set; }
         public FlywayLicenseKeyOption LicenseKey { get; set; }
 
         public FlywayRepairOptionGroup()
@@ -40,9 +44,11 @@ namespace Flyway.net.OptionGroups
             Password = new FlywayPasswordOption();
             ConnectRetries = new FlywayConnectRetriesOption();
             InitSql = new FlywayInitSqlOption();
+            DefaultSchema = new FlywayDefaultSchemaOption();
             Schemas = new FlywaySchemasOption();
             Table = new FlywayTableOption();
             Locations = new FlywayLocationsOption();
+            Color = new FlywayColorOption();
             JarDirs = new FlywayJarDirsOption();
             SqlMigrationPrefix = new FlywaySqlMigrationPrefixOption();
             UndoSqlMigrationPrefix = new FlywayUndoSqlMigrationPrefixOption();
@@ -50,6 +56,7 @@ namespace Flyway.net.OptionGroups
             SqlMigrationSeparator = new FlywaySqlMigrationSeparatorOption();
             SqlMigrationSuffixes = new FlywaySqlMigrationSuffixesOption();
             Encoding = new FlywayEncodingOption();
+            ValidateMigrationNaming = new FlywayValidateMigrationNamingOption();
             PlaceholderReplacement = new FlywayPlaceholderReplacementOption();
             Placeholders = new FlywayPlaceholdersOption();
             PlaceholderPrefix = new FlywayPlaceholderPrefixOption();
@@ -58,6 +65,7 @@ namespace Flyway.net.OptionGroups
             SkipDefaultResolvers = new FlywaySkipDefaultResolversOption();
             Callbacks = new FlywayCallbacksOption();
             SkipDefaultCallbacks = new FlywaySkipDefaultCallbacksOption();
+            WorkingDirectory = new FlywayWorkingDirectoryOption();
             LicenseKey = new FlywayLicenseKeyOption();
         }
 
@@ -71,9 +79,11 @@ namespace Flyway.net.OptionGroups
                 Password.Formatted(),
                 ConnectRetries.Formatted(),
                 InitSql.Formatted(),
+                DefaultSchema.Formatted(),
                 Schemas.Formatted(),
                 Table.Formatted(),
                 Locations.Formatted(),
+                Color.Formatted(),
                 JarDirs.Formatted(),
                 SqlMigrationPrefix.Formatted(),
                 UndoSqlMigrationPrefix.Formatted(),
@@ -81,6 +91,7 @@ namespace Flyway.net.OptionGroups
                 SqlMigrationSeparator.Formatted(),
                 SqlMigrationSuffixes.Formatted(),
                 Encoding.Formatted(),
+                ValidateMigrationNaming.Formatted(),
                 PlaceholderReplacement.Formatted(),
                 Placeholders.Formatted(),
                 PlaceholderPrefix.Formatted(),
@@ -89,6 +100,7 @@ namespace Flyway.net.OptionGroups
                 SkipDefaultResolvers.Formatted(),
                 Callbacks.Formatted(),
                 SkipDefaultCallbacks.Formatted(),
+                WorkingDirectory.Formatted(),
                 LicenseKey.Formatted()
             };
 
@@ -104,9 +116,11 @@ namespace Flyway.net.OptionGroups
             options.Password.Value = configuration.Password.Value;
             options.ConnectRetries.Value = configuration.ConnectRetries.Value;
             options.InitSql.Value = configuration.InitSql.Value;
+            options.DefaultSchema.Value = configuration.DefaultSchema.Value;
             options.Schemas.Value = configuration.Schemas.Value;
             options.Table.Value = configuration.Table.Value;
             options.Locations.Value = configuration.Locations.Value;
+            options.Color.Value = configuration.Color.Value;
             options.JarDirs.Value = configuration.JarDirs.Value;
             options.SqlMigrationPrefix.Value = configuration.SqlMigrationPrefix.Value;
             options.UndoSqlMigrationPrefix.Value = configuration.UndoSqlMigrationPrefix.Value;
@@ -114,6 +128,7 @@ namespace Flyway.net.OptionGroups
             options.SqlMigrationSeparator.Value = configuration.SqlMigrationSeparator.Value;
             options.SqlMigrationSuffixes.Value = configuration.SqlMigrationSuffixes.Value;
             options.Encoding.Value = configuration.Encoding.Value;
+            options.ValidateMigrationNaming.Value = configuration.ValidateMigrationNaming.Value;
             options.PlaceholderReplacement.Value = configuration.PlaceholderReplacement.Value;
             options.Placeholders.Value = configuration.Placeholders.Value;
             options.PlaceholderPrefix.Value = configuration.PlaceholderPrefix.Value;
@@ -122,6 +137,7 @@ namespace Flyway.net.OptionGroups
             options.SkipDefaultResolvers.Value = configuration.SkipDefaultResolvers.Value;
             options.Callbacks.Value = configuration.Callbacks.Value;
             options.SkipDefaultCallbacks.Value = configuration.SkipDefaultCallbacks.Value;
+            options.WorkingDirectory.Value = configuration.WorkingDirectory.Value;
             options.LicenseKey.Value = configuration.LicenseKey.Value;
 
             return options;

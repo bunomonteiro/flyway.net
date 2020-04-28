@@ -369,9 +369,9 @@ namespace Flyway.net
         public FlywayDryRunOutputOption(string name = "dryRunOutput", bool required = false, string prefix = "-", bool isProFeature = true)
             : base(name, required, prefix, isProFeature) { }
     }
-    public class FlywayOracleSqlplusOption : FlywayOption<string>
+    public class FlywayOracleSqlplusOption : FlywayOption<bool?>
     {
-        public FlywayOracleSqlplusOption(string @value) : base("oracle.sqlplus", isProFeature: true) { Value = @value; }
+        public FlywayOracleSqlplusOption(bool? @value) : base("oracle.sqlplus", isProFeature: true) { Value = @value; }
         public FlywayOracleSqlplusOption(string name = "oracle.sqlplus", bool required = false, string prefix = "-", bool isProFeature = true)
             : base(name, required, prefix, isProFeature) { }
     }
@@ -379,6 +379,48 @@ namespace Flyway.net
     {
         public FlywayLicenseKeyOption(string @value) : base("licenseKey", isProFeature: true) { Value = @value; }
         public FlywayLicenseKeyOption(string name = "licenseKey", bool required = false, string prefix = "-", bool isProFeature = true)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayDefaultSchemaOption : FlywayOption<string>
+    {
+        public FlywayDefaultSchemaOption(string @value) : base("defaultSchema") { Value = @value; }
+        public FlywayDefaultSchemaOption(string name = "defaultSchema", bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayTableSpaceOption : FlywayOption<string>
+    {
+        public FlywayTableSpaceOption(string @value) : base("tableSpace") { Value = @value; }
+        public FlywayTableSpaceOption(string name = "tableSpace", bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayColorOption : FlywayOption<string>
+    {
+        public FlywayColorOption(string @value) : base("color") { Value = @value; }
+        public FlywayColorOption(string name = "color", bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayValidateMigrationNamingOption : FlywayOption<bool?>
+    {
+        public FlywayValidateMigrationNamingOption(bool? @value) : base("validateMigrationNaming") { Value = @value; }
+        public FlywayValidateMigrationNamingOption(string name = "validateMigrationNaming", bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayOutputQueryResultsOption : FlywayOption<bool?>
+    {
+        public FlywayOutputQueryResultsOption(bool? @value) : base("outputQueryResults") { Value = @value; }
+        public FlywayOutputQueryResultsOption(string name = "outputQueryResults", bool required = false, string prefix = "-", bool isProFeature = false)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayOracleSqlplusWarnOption : FlywayOption<bool?>
+    {
+        public FlywayOracleSqlplusWarnOption(bool? @value) : base("oracle.sqlplusWarn", isProFeature: true) { Value = @value; }
+        public FlywayOracleSqlplusWarnOption(string name = "oracle.sqlplusWarn", bool required = false, string prefix = "-", bool isProFeature = true)
+            : base(name, required, prefix, isProFeature) { }
+    }
+    public class FlywayWorkingDirectoryOption : FlywayOption<string>
+    {
+        public FlywayWorkingDirectoryOption(string @value) : base("workingDirectory") { Value = @value; }
+        public FlywayWorkingDirectoryOption(string name = "workingDirectory", bool required = false, string prefix = "-", bool isProFeature = false)
             : base(name, required, prefix, isProFeature) { }
     }
 }

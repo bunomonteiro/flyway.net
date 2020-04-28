@@ -12,15 +12,19 @@ namespace Flyway.net.OptionGroups
         public FlywayPasswordOption Password { get; set; }
         public FlywayConnectRetriesOption ConnectRetries { get; set; }
         public FlywayInitSqlOption InitSql { get; set; }
+        public FlywayDefaultSchemaOption DefaultSchema { get; set; }
         public FlywaySchemasOption Schemas { get; set; }
         public FlywayTableOption Table { get; set; }
+        public FlywayTableSpaceOption TableSpace { get; set; }
         public FlywayLocationsOption Locations { get; set; }
+        public FlywayColorOption Color { get; set; }
         public FlywayJarDirsOption JarDirs { get; set; }
         public FlywaySqlMigrationPrefixOption SqlMigrationPrefix { get; set; }
         public FlywayUndoSqlMigrationPrefixOption UndoSqlMigrationPrefix { get; set; }
         public FlywayRepeatableSqlMigrationPrefixOption RepeatableSqlMigrationPrefix { get; set; }
         public FlywaySqlMigrationSeparatorOption SqlMigrationSeparator { get; set; }
         public FlywaySqlMigrationSuffixesOption SqlMigrationSuffixes { get; set; }
+        public FlywayValidateMigrationNamingOption ValidateMigrationNaming { get; set; }
         public FlywayStreamOption Stream { get; set; }
         public FlywayBatchOption Batch { get; set; }
         public FlywayMixedOption Mixed { get; set; }
@@ -36,6 +40,7 @@ namespace Flyway.net.OptionGroups
         public FlywaySkipDefaultCallbacksOption SkipDefaultCallbacks { get; set; }
         public FlywayTargetOption Target { get; set; }
         public FlywayOutOfOrderOption OutOfOrder { get; set; }
+        public FlywayOutputQueryResultsOption OutputQueryResults { get; set; }
         public FlywayValidateOnMigrateOption ValidateOnMigrate { get; set; }
         public FlywayCleanOnValidationErrorOption CleanOnValidationError { get; set; }
         public FlywayIgnoreMissingMigrationsOption IgnoreMissingMigrations { get; set; }
@@ -49,6 +54,8 @@ namespace Flyway.net.OptionGroups
         public FlywayErrorOverridesOption ErrorOverrides { get; set; }
         public FlywayDryRunOutputOption DryRunOutput { get; set; }
         public FlywayOracleSqlplusOption OracleSqlplus { get; set; }
+        public FlywayOracleSqlplusWarnOption OracleSqlplusWarn { get; set; }
+        public FlywayWorkingDirectoryOption WorkingDirectory { get; set; }
         public FlywayLicenseKeyOption LicenseKey { get; set; }
 
         public FlywayMigrateOptionGroup()
@@ -97,6 +104,13 @@ namespace Flyway.net.OptionGroups
             DryRunOutput = new FlywayDryRunOutputOption();
             OracleSqlplus = new FlywayOracleSqlplusOption();
             LicenseKey = new FlywayLicenseKeyOption();
+            DefaultSchema = new FlywayDefaultSchemaOption();
+            TableSpace = new FlywayTableSpaceOption();
+            Color = new FlywayColorOption();
+            ValidateMigrationNaming = new FlywayValidateMigrationNamingOption();
+            OutputQueryResults = new FlywayOutputQueryResultsOption();
+            OracleSqlplusWarn = new FlywayOracleSqlplusWarnOption();
+            WorkingDirectory = new FlywayWorkingDirectoryOption();
         }
 
         public override string ToArgs()
@@ -146,7 +160,14 @@ namespace Flyway.net.OptionGroups
                 ErrorOverrides.Formatted(),
                 DryRunOutput.Formatted(),
                 OracleSqlplus.Formatted(),
-                LicenseKey.Formatted()
+                LicenseKey.Formatted(),
+                DefaultSchema.Formatted(),
+                TableSpace.Formatted(),
+                Color.Formatted(),
+                ValidateMigrationNaming.Formatted(),
+                OutputQueryResults.Formatted(),
+                OracleSqlplusWarn.Formatted(),
+                WorkingDirectory.Formatted()
             };
 
             return ToArgs(options);
@@ -199,6 +220,13 @@ namespace Flyway.net.OptionGroups
             options.DryRunOutput.Value = configuration.DryRunOutput.Value;
             options.OracleSqlplus.Value = configuration.OracleSqlplus.Value;
             options.LicenseKey.Value = configuration.LicenseKey.Value;
+            options.DefaultSchema.Value = configuration.DefaultSchema.Value;
+            options.TableSpace.Value = configuration.TableSpace.Value;
+            options.Color.Value = configuration.Color.Value;
+            options.ValidateMigrationNaming.Value = configuration.ValidateMigrationNaming.Value;
+            options.OutputQueryResults.Value = configuration.OutputQueryResults.Value;
+            options.OracleSqlplusWarn.Value = configuration.OracleSqlplusWarn.Value;
+            options.WorkingDirectory.Value = configuration.WorkingDirectory.Value;
 
             return options;
         }
