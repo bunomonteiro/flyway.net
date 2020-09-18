@@ -175,6 +175,8 @@ namespace Flyway.net.OptionGroups
 
         public static implicit operator FlywayMigrateOptionGroup(FlywayConfiguration configuration)
         {
+            if(configuration == null) { return null; }
+
             FlywayMigrateOptionGroup options = new FlywayMigrateOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;

@@ -9,15 +9,27 @@ namespace Flyway.net
     public class Flyway
     {
         private readonly string _flywayPath;
+        public FlywayConfiguration Configuration { get; set; }
 
         public Flyway(string flywayPath)
         {
             if(string.IsNullOrWhiteSpace(flywayPath) || !System.IO.Directory.Exists(flywayPath))
             {
-                throw new Exception("Invalid Path");
+                throw new Exception("Invalid Flyway path");
             }
 
             _flywayPath = flywayPath;
+        }
+
+        public Flyway(FlywayConfiguration configuration)
+        {
+            if(configuration == null || string.IsNullOrWhiteSpace(configuration.FlywayPath) || !System.IO.Directory.Exists(configuration.FlywayPath))
+            {
+                throw new Exception("Invalid Flyway path");
+            }
+
+            _flywayPath = configuration.FlywayPath;
+            Configuration = configuration;
         }
 
         /// <summary>
@@ -25,77 +37,77 @@ namespace Flyway.net
         /// </summary>
         public FlywayOutputResult Migrate(FlywayMigrateOptionGroup options = null)
         {
-            return Exec("migrate", options);
+            return Exec("migrate", options ?? Configuration);
         }
         public Task<FlywayOutputResult> MigrateAsync(FlywayMigrateOptionGroup options = null)
         {
-            return ExecAsync("migrate", options);
+            return ExecAsync("migrate", options ?? Configuration);
         }
         /// <summary>
         /// Drops all objects in the configured schemas.
         /// </summary>
         public FlywayOutputResult Clean(FlywayCleanOptionGroup options = null)
         {
-            return Exec("clean", options);
+            return Exec("clean", options ?? Configuration);
         }
         public Task<FlywayOutputResult> CleanAsync(FlywayCleanOptionGroup options = null)
         {
-            return ExecAsync("clean", options);
+            return ExecAsync("clean", options ?? Configuration);
         }
         /// <summary>
         /// Prints the details and status information about all the migrations.
         /// </summary>
         public FlywayOutputResult Info(FlywayInfoOptionGroup options = null)
         {
-            return Exec("info", options);
+            return Exec("info", options ?? Configuration);
         }
         public Task<FlywayOutputResult> InfoAsync(FlywayInfoOptionGroup options = null)
         {
-            return ExecAsync("info", options);
+            return ExecAsync("info", options ?? Configuration);
         }
         /// <summary>
         /// Validates the applied migrations against the available ones.
         /// </summary>
         public FlywayOutputResult Validate(FlywayValidateOptionGroup options = null)
         {
-            return Exec("validate", options);
+            return Exec("validate", options ?? Configuration);
         }
         public Task<FlywayOutputResult> ValidateAsync(FlywayValidateOptionGroup options = null)
         {
-            return ExecAsync("validate", options);
+            return ExecAsync("validate", options ?? Configuration);
         }
         /// <summary>
         /// Undoes the most recently applied versioned migration.
         /// </summary>
         public FlywayOutputResult Undo(FlywayUndoOptionGroup options = null)
         {
-            return Exec("undo", options);
+            return Exec("undo", options ?? Configuration);
         }
         public Task<FlywayOutputResult> UndoAsync(FlywayUndoOptionGroup options = null)
         {
-            return ExecAsync("undo", options);
+            return ExecAsync("undo", options ?? Configuration);
         }
         /// <summary>
         /// Baselines an existing database, excluding all migrations upto and including baselineVersion.
         /// </summary>
         public FlywayOutputResult Baseline(FlywayBaselineOptionGroup options = null)
         {
-            return Exec("baseline", options);
+            return Exec("baseline", options ?? Configuration);
         }
         public Task<FlywayOutputResult> BaselineAsync(FlywayBaselineOptionGroup options = null)
         {
-            return ExecAsync("baseline", options);
+            return ExecAsync("baseline", options ?? Configuration);
         }
         /// <summary>
         /// Repairs the schema history table.
         /// </summary>
         public FlywayOutputResult Repair(FlywayRepairOptionGroup options = null)
         {
-            return Exec("repair", options);
+            return Exec("repair", options ?? Configuration);
         }
         public Task<FlywayOutputResult> RepairAsync(FlywayRepairOptionGroup options = null)
         {
-            return ExecAsync("repair", options);
+            return ExecAsync("repair", options ?? Configuration);
         }
 
         private FlywayOutputResult Exec(string command, FlywayOptionGroup options)

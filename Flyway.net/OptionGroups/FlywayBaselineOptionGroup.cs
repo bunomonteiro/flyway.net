@@ -79,6 +79,8 @@ namespace Flyway.net.OptionGroups
 
         public static implicit operator FlywayBaselineOptionGroup(FlywayConfiguration configuration)
         {
+            if(configuration == null) { return null; }
+
             FlywayBaselineOptionGroup options = new FlywayBaselineOptionGroup();
             options.BaselineDescription.Value = configuration.BaselineDescription.Value;
             options.BaselineVersion.Value = configuration.BaselineVersion.Value;

@@ -131,6 +131,8 @@ namespace Flyway.net.OptionGroups
 
         public static implicit operator FlywayValidateOptionGroup(FlywayConfiguration configuration)
         {
+            if(configuration == null) { return null; }
+
             FlywayValidateOptionGroup options = new FlywayValidateOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;

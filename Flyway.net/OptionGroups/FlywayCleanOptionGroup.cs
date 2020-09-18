@@ -70,6 +70,8 @@ namespace Flyway.net.OptionGroups
 
         public static implicit operator FlywayCleanOptionGroup(FlywayConfiguration configuration)
         {
+            if(configuration == null) { return null; }
+
             FlywayCleanOptionGroup options = new FlywayCleanOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;

@@ -109,6 +109,8 @@ namespace Flyway.net.OptionGroups
 
         public static implicit operator FlywayRepairOptionGroup(FlywayConfiguration configuration)
         {
+            if(configuration == null) { return null; }
+
             FlywayRepairOptionGroup options = new FlywayRepairOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;

@@ -147,6 +147,8 @@ namespace Flyway.net.OptionGroups
 
         public static implicit operator FlywayUndoOptionGroup(FlywayConfiguration configuration)
         {
+            if(configuration == null) { return null; }
+
             FlywayUndoOptionGroup options = new FlywayUndoOptionGroup();
             options.Url.Value = configuration.Url.Value;
             options.Driver.Value = configuration.Driver.Value;

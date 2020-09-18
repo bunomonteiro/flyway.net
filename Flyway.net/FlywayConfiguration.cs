@@ -12,6 +12,7 @@ namespace Flyway.net
     public class FlywayConfiguration
     {
         #region keys
+        public string FlywayPath { get; set; }
         public string ConfigurationFilePath { get; set; }
         public FlywayUrlOption Url { get; private set; }
         public FlywayDriverOption Driver { get; private set; }
@@ -71,8 +72,8 @@ namespace Flyway.net
         private Func<string, string[]> Loader { get; set; }
         private bool IsInMemory { get; set; }
 
-        public FlywayConfiguration(string configurationFilePath = null) : this(File.WriteAllText, File.ReadAllLines, configurationFilePath) { }
-        public FlywayConfiguration(Action<string, string> saver, Func<string, string[]> loader, string configurationFilePath = null)
+        public FlywayConfiguration(string flywayPath = null, string configurationFilePath = null) : this(File.WriteAllText, File.ReadAllLines, flywayPath, configurationFilePath) { }
+        public FlywayConfiguration(Action<string, string> saver, Func<string, string[]> loader, string flywayPath = null, string configurationFilePath = null)
         {
             if(saver is null)
             {
@@ -84,6 +85,7 @@ namespace Flyway.net
                 throw new ArgumentNullException(nameof(loader));
             }
 
+            FlywayPath = flywayPath;
             ConfigurationFilePath = configurationFilePath;
             Saver = saver;
             Loader = loader;
