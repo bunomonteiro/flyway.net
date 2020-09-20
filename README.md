@@ -59,7 +59,7 @@ var config = new FlywayConfiguration(saver, loader);
 // config.Save();
 ```
 
-#### Execute
+### Execute
 ```c#
 var cleanOutput = flyway.Clean();
 var infoOutput = flyway.Info();
