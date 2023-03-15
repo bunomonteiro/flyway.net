@@ -81,17 +81,17 @@ var validateOutput = flyway.Validate(anotherConfig);
 
 ## Todo
 
-v. 1.0.0 (04/2020)
-- ☑ First Release
-
-v. 1.1.0 (04/2020)
-- ☑ Updated to version 6.4.0 of Flyway
+v. x
+- ☐ Create the new options/parameters present in the new version of [Flyway].
 
 v. 1.1.1 (09/2020)
 - ☑ Fix: Flyway constructor accepts FlywayConfiguration
 
-v. x
-- ☐ Create the new options/parameters present in the new version of [Flyway].
+v. 1.1.0 (04/2020)
+- ☑ Updated to version 6.4.0 of Flyway
+
+v. 1.0.0 (04/2020)
+- ☑ First Release
 
 License
 ----
