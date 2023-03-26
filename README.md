@@ -22,7 +22,7 @@ var flyway = new Flyway(@"[flyway path]");
 You can configure in a few ways
 
 #### Load Configurations
-By default, **Load()** will load a file from disc
+By default, **Load()** will load a file from filesystem
 ```c#
 var config = new FlywayConfiguration(configurationFilePath: "[flyway path]\conf\flyway.conf").Load();
 config.FlywayPath = @"[flyway path]"; // is required
@@ -41,7 +41,7 @@ var flyway = new Flyway(config);
 
 #### Save Configurations
 You do not need to save the configurations, but you have that possibility.
-By default, **Save()** will write a file to the disc
+By default, **Save()** will write a file to the filesystem
 
 ```c#
 var config = new FlywayConfiguration("[flyway path]\conf\flyway.conf");
